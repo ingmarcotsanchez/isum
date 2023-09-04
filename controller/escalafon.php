@@ -4,16 +4,6 @@
     $escalafon = new Escalafon();
 
     switch($_GET["opc"]){
-        /*case "inputselect":
-            $datos = $categoria->categoria();
-            if(is_array($datos)==true and count($datos)<>0){
-                $html = "<option label='Seleccione'></option>";
-                foreach($datos as $row){
-                    $html .= "<option value='".$row['id']."'>".$row['nombre']."</option>";
-                }
-                echo $html;
-            }
-            break;*/
         case "guardaryeditar":
                 if(empty($_POST["esc_id"])){
                     //$curso es la variable que tenemos inicializada, los metodos son los que creamos en el archivo de models

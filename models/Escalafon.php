@@ -4,17 +4,17 @@
 
             $conectar = parent::Conexion();
             parent::set_names();
-            $sql="INSERT INTO escalafon (esc_id, esc_nombre, est) VALUES (NULL,?,'1');";
-     
+            $sql="INSERT INTO escalafon (esc_id,esc_nombre, est) VALUES (NULL,?,'1');";
+
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $esc_nombre);
             $sql->execute();
-       
+
             return $resultado = $sql->fetchAll();
         }
 
         public function update_escalafon($esc_id,$esc_nombre){
-          
+
             $conectar= parent::conexion();
             parent::set_names();
             $sql="UPDATE escalafon

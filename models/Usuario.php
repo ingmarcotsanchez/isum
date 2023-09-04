@@ -23,7 +23,7 @@
                         $_SESSION["usu_apep"]=$resultado["usu_apep"];
                         $_SESSION["usu_apem"]=$resultado["usu_apem"];
                         $_SESSION["usu_correo"]=$resultado["usu_correo"];
-                        $_SESSION["usu_rol"]=$resultado["usu_rol"];
+                        $_SESSION["rol_id"]=$resultado["rol_id"];
                         header("Location:".Conectar::ruta()."views/inicio.php");
                         exit();
                     }else{
@@ -34,11 +34,11 @@
             }
         }   
         
-        public function insert_usuario($usu_nom,$usu_apep,$usu_apem,$usu_correo,$usu_pass,$usu_sex,$usu_rol,$usu_tel,$esc_id,$usu_fecini){
+        public function insert_usuario($usu_nom,$usu_apep,$usu_apem,$usu_correo,$usu_pass,$usu_sex,$rol_id,$usu_tel,$esc_id,$usu_fecini){
 
             $conectar = parent::Conexion();
             parent::set_names();
-            $sql="INSERT INTO usuario (usu_id, usu_nom, usu_apep, usu_apem, usu_correo, usu_pass, usu_sex, usu_rol, usu_tel, esc_id, usu_fecini, fech_crea, est) VALUES (NULL,?,?,?,?,?,?,?,?,?,?,now(),'1');";
+            $sql="INSERT INTO usuario (usu_id, usu_nom, usu_apep, usu_apem, usu_correo, usu_pass, usu_sex, rol_id, usu_tel, esc_id, usu_fecini, fech_crea, est) VALUES (NULL,?,?,?,?,?,?,?,?,?,?,now(),'1');";
      
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $usu_nom);
@@ -47,13 +47,22 @@
             $sql->bindValue(4, $usu_correo);
             $sql->bindValue(5, $usu_pass);
             $sql->bindValue(6, $usu_sex);
-            $sql->bindValue(7, $usu_rol);
+            $sql->bindValue(7, $rol_id);
             $sql->bindValue(8, $usu_tel);
             $sql->bindValue(9, $esc_id);
             $sql->bindValue(10, $usu_fecini);
             $sql->execute();
        
             return $resultado = $sql->fetchAll();
+        }
+
+        function obtenerRoles() {
+            $conectar = parent::Conexion();
+            parent::set_names();
+            $sql = "SELECT rol_id, rol_nombre FROM rol";
+            $stmt = $conectar->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public function update_usuario($usu_id, $usu_nom, $usu_apep, $usu_apem, $usu_pass, $usu_sex, $usu_tel, $esc_id, $usu_fecfin){
@@ -98,8 +107,12 @@
         public function usuario(){
             $conectar = parent::Conexion();
             parent::set_names();
-            $sql = "SELECT * FROM usuario WHERE est = 1";
-            $sql=$conectar->prepare($sql);
+            $sql = "SELECT usuario.*, escalafon.esc_nombre AS esc_nombre, rol.rol_nombre AS rol_nombre
+                    FROM usuario
+                    INNER JOIN escalafon ON usuario.esc_id = escalafon.esc_id
+                    INNER JOIN rol ON usuario.rol_id = rol.rol_id
+                    WHERE usuario.est = 1";
+            $sql=$conectar->prepare($sql);  
             $sql->execute();
             return $resultado = $sql->fetchAll();
         }
@@ -117,7 +130,16 @@
         public function escalafon(){
             $conectar = parent::Conexion();
             parent::set_names();
-            $sql = "SELECT * FROM escalafon";
+            $sql = "SELECT * FROM escalafon WHERE est = 1 ";
+            $sql=$conectar->prepare($sql);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
+        }
+
+        public function rol () {
+            $conectar = parent::Conexion();
+            parent::set_names();
+            $sql = "SELECT * FROM rol";
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado = $sql->fetchAll();

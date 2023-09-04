@@ -14,6 +14,17 @@
                 echo $html;
             }
             break;
+
+        case "inputselectRol":
+            $datos = $usuario->rol();
+            if(is_array($datos)==true and count($datos)<>0){
+                $html = "<option label='Seleccione un rol'></option>";
+                foreach($datos as $row){
+                    $html .= "<option value='".$row['rol_id']."'>".$row['rol_nombre']."</option>";
+                }
+                echo $html;
+            }
+            break;
         case "inputselectProfesor":
             $datos = $usuario->usuario();
             if(is_array($datos)==true and count($datos)<>0){
@@ -27,7 +38,7 @@
         case "guardaryeditar":
             if(empty($_POST["usu_id"])){
                 //$curso es la variable que tenemos inicializada, los metodos son los que creamos en el archivo de models
-                $usuario->insert_usuario($_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["usu_sex"],$_POST["usu_rol"],$_POST["usu_tel"],$_POST["esc_id"],$_POST["usu_fecfin"]);
+                $usuario->insert_usuario($_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["usu_sex"],$_POST["rol_id"],$_POST["usu_tel"],$_POST["esc_id"],$_POST["usu_fecfin"]);
             }else{
                 $usuario->update_usuario($_POST["usu_id"],$_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_pass"],$_POST["usu_sex"],$_POST["usu_tel"],$_POST["esc_id"],$_POST["usu_fecfin"]);
             }
@@ -42,7 +53,7 @@
                     $output["usu_apem"] = $row["usu_apem"];
                     $output["usu_correo"] = $row["usu_correo"];
                     $output["usu_sex"] = $row["usu_sex"];
-                    $output["usu_rol"] = $row["usu_rol"];
+                    $output["rol_id"] = $row["rol_id"];
                     $output["usu_tel"] = $row["usu_tel"];
                     $output["esc_id"] = $row["esc_id"];
                     $output["usu_fecini"] = $row["usu_fecini"];
@@ -66,9 +77,9 @@
                 $sub_array[] = $row["usu_apem"];
                 $sub_array[] = $row["usu_correo"];
                 $sub_array[] = $row["usu_sex"];
-                $sub_array[] = $row["usu_rol"];
+                $sub_array[] = $row["rol_nombre"];
                 $sub_array[] = $row["usu_tel"];
-                $sub_array[] = $row["esc_id"];
+                $sub_array[] = $row["esc_nombre"];
                 $sub_array[] = $row["usu_fecini"];
                 $sub_array[] = $row["usu_fecfin"];
                 $sub_array[] = '<button type="button" onClick="editar('.$row["usu_id"].');"  id="'.$row["usu_id"].'" class="btn btn-outline-success btn-icon"><i class="bx bx-edit-alt"></i></button>';
@@ -124,6 +135,8 @@
                 echo json_encode($output);
             }
             break;
+
+            
         
     }
 ?>

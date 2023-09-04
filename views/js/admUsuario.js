@@ -40,6 +40,7 @@ $(document).ready(function(){
     });
 
     select_escalafon();
+    select_rol();
 
     $('#usuario_data').DataTable({
         "aProcessing": true,
@@ -90,6 +91,7 @@ function nuevo(){
     $('#titulo_modal').html('Nuevo Usuario');
     $('#usuario_form')[0].reset();
     select_escalafon();
+    select_rol();
     $('#modalcrearUsuario').modal('show');
 }
 
@@ -132,6 +134,12 @@ function eliminar(usu_id){
 function select_escalafon(){
     $.post("/ISUM/controller/usuario.php?opc=inputselectEscalafon",function (data){
         $('#esc_id').html(data);
+    });
+}
+
+function select_rol(){
+    $.post("/ISUM/controller/usuario.php?opc=inputselectRol",function (data){
+        $('#rol_id').html(data);
     });
 }
 

@@ -15,7 +15,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="usu_nom">Nombre</label>
-                                <input type="text" class="form-control" name="usu_nom" id="usu_nom" placeholder="Ingrese su categoria">
+                                <input type="text" class="form-control" name="usu_nom" id="usu_nom" placeholder="Ingrese su Nombre">
                             </div>
                         </div>
                     </div>
@@ -23,13 +23,13 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="usu_apep">Apellido Paterno</label>
-                                <input type="text" class="form-control" name="usu_apep" id="usu_apep" placeholder="Ingrese su categoria">
+                                <input type="text" class="form-control" name="usu_apep" id="usu_apep" placeholder="Ingrese su Nombre">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="usu_apem">Apellido Materno</label>
-                                <input type="text" class="form-control" name="usu_apem" id="usu_apem" placeholder="Ingrese su categoria">
+                                <input type="text" class="form-control" name="usu_apem" id="usu_apem" placeholder="Ingrese su Apellido">
                             </div>
                         </div>
                     </div>
@@ -37,13 +37,13 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="usu_correo">Correo Electrónico</label>
-                                <input type="email" class="form-control" name="usu_correo" id="usu_correo" placeholder="Ingrese su categoria">
+                                <input type="email" class="form-control" name="usu_correo" id="usu_correo" placeholder="Ingrese su Correo">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="usu_pass">Password</label>
-                                <input type="password" class="form-control" name="usu_pass" id="usu_pass" placeholder="Ingrese su categoria">
+                                <input type="password" class="form-control" name="usu_pass" id="usu_pass" placeholder="Ingrese su Contraseña">
                             </div>
                         </div>
                     </div>  
@@ -60,12 +60,9 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="usu_apem">Rol</label>
-                                <select class="form-control select2" name="usu_rol" id="usu_rol" data-placeholder="Seleccione">
-                                    <option label="Seleccione"></option>
-                                    <option value="C">Coordinador</option>
-                                    <option value="TC">Profesor TC</option>
-                                    <option value="MT">Profesor MT</option>
+                                <label>Rol</label>
+                                <select class="form-control select2" style="width:100%" name="rol_id" id="rol_id" data-placeholder="Seleccione">
+                                    <option label="Seleccione un rol"></option>
                                 </select>
                             </div>
                         </div>
@@ -74,7 +71,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="usu_tel">Teléfono</label>
-                                <input type="text" class="form-control" name="usu_tel" id="usu_tel" placeholder="Ingrese su categoria">
+                                <input type="text" class="form-control" name="usu_tel" id="usu_tel" placeholder="Ingrese su Telefono">
                             </div>
                         </div>
                         <div class="col-6">
