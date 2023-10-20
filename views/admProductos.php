@@ -1,5 +1,8 @@
 <?php
 define( "BASE_URL", "/ISUM/views/");
+/* Llamamos al archivo de conexion.php */
+require_once("../config/conexion.php");
+if(isset($_SESSION["usu_id"])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +10,7 @@ define( "BASE_URL", "/ISUM/views/");
   <?php
     include("modulos/head.php");
   ?>
-  <title>Proyecto | Reportes</title>
+  <title>ISUM | Productos</title>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -33,7 +36,30 @@ define( "BASE_URL", "/ISUM/views/");
 
             <section class="content">
                 <div class="container-fluid">
-                    <h1>Productos</h1>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Admón Productos</h3>
+                        </div>
+                        <div class="card-body">
+                            <button type="button" class="btn btn-outline-primary mb-2" onclick="nuevo()">Crear Producto</button>
+                            <table id="productos_data" class="table display responsive nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Tipo de producto</th>
+                                        <th>Año</th>
+                                        <th>Semillero</th>
+                                        <th>Profesor</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -43,14 +69,14 @@ define( "BASE_URL", "/ISUM/views/");
         ?>
     </div>
     <!-- /.Site warapper -->
-    <?php
-    include("modulos/js.php");
-    ?>
-
-    <script>
-    $(document).ready(function () {
-        $('#example').DataTable();
-    });
-    </script>
+    <?php require_once("admProductoModal.php"); ?>
+    <?php include("modulos/js.php"); ?>
+    <script type="text/javascript" src="js/admProductos.js"></script>
 </body>
 </html>
+<?php
+  }else{
+    /* Si no a iniciado sesion se redireccionada a la ventana principal */
+   header("Location:".Conectar::ruta()."views/404.php");
+ }
+?>

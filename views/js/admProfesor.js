@@ -1,7 +1,7 @@
 var usu_id = $('#usu_idx').val();
 
 function init(){
-    $("#semillero_form").on("submit",function(e){
+    $("#profesor_form").on("submit",function(e){
         guardaryeditar(e);
     });
 
@@ -10,10 +10,10 @@ function init(){
 function guardaryeditar(e){
     //console.log("prueba");
     e.preventDefault();
-    var formData = new FormData($("#semillero_form")[0]);
+    var formData = new FormData($("#profesor_form")[0]);
     //console.log(formData);
     $.ajax({
-        url: "/ISUM/controller/semillero.php?opc=guardaryeditar",
+        url: "/ISUM/controller/profesor.php?opc=guardaryeditar",
         type: "POST",
         data: formData,
         contentType: false,
@@ -21,8 +21,8 @@ function guardaryeditar(e){
         
         success: function(data){
             console.log(data);
-            $('#semillero_data').DataTable().ajax.reload();
-            $('#modalcrearSemillero').modal('hide');
+            $('#profesor_data').DataTable().ajax.reload();
+            $('#modalcrearProfesor').modal('hide');
 
             Swal.fire({
                 title: 'Correcto!',
@@ -35,13 +35,17 @@ function guardaryeditar(e){
 }
 
 $(document).ready(function(){
-    $('#prof_id').select2({
-        dropdownParent: $("#modalcrearSemillero")
+    $('#rol_id').select2({
+        dropdownParent: $('#modalcrearProfesor')
+    });
+    $('#esc_id').select2({
+        dropdownParent: $('#modalcrearProfesor')
     });
 
-    select_profesor();
+    combo_rol();
+    combo_escalfon();
 
-    $('#semillero_data').DataTable({
+    $('#profesor_data').DataTable({
         "aProcessing": true,
         "aServerSide": true,
         dom: 'Bfrtip',
@@ -50,7 +54,7 @@ $(document).ready(function(){
             'csvHtml5',
         ],
         "ajax":{
-            url:"/ISUM/controller/semillero.php?opc=listar",
+            url:"/ISUM/controller/profesor.php?opc=listar",
             type:"post"
         },
         "bDestroy": true,
@@ -87,27 +91,31 @@ $(document).ready(function(){
 });
 
 function nuevo(){
-    $('#titulo_modal').html('Nuevo Semillero');
-    $('#semillero_form')[0].reset();
-    //select_profesor();
-    $('#modalcrearSemillero').modal('show');
+    $('#titulo_modal').html('Nuevo Profesor');
+    $('#profesor_form')[0].reset();
+    $('#modalcrearProfesor').modal('show');
 }
 
-function editar(sem_id){
-    $.post("/ISUM/controller/semillero.php?opc=mostrar",{sem_id:sem_id},function (data){
+function editar(prof_id){
+    $.post("/ISUM/controller/profesor.php?opc=mostrar",{prof_id:prof_id},function (data){
         data = JSON.parse(data);
-        console.log(data);
-        $('#sem_id').val(data.sem_id);
-        $('#sem_nom').val(data.sem_nom);
-        $('#sem_anno').val(data.sem_anno);
-        $('#prof_id').val(data.prof_id).trigger('change');
-        $('#sem_linea').val(data.sem_linea);
+        //console.log(data);
+        $('#prof_id').val(data.prof_id);
+        $('#prof_nom').val(data.prof_nom);
+        $('#prof_apep').val(data.prof_apep);
+        $('#prof_apem').val(data.prof_apem);
+        $('#prof_correo').val(data.prof_correo);
+        $('#prof_niv').val(data.prof_niv);
+        $('#prof_sex').val(data.prof_sex);
+        $('#prof_telf').val(data.prof_telf);
+        $('#rol_id').val(data.rol_id).trigger('change');
+        $('#esc_id').val(data.esc_id).trigger('change');
     });
-    $('#titulo_modal').html('Editar Semillero');
-    $('#modalcrearSemillero').modal('show');
+    $('#titulo_modal').html('Editar Profesor');
+    $('#modalcrearProfesor').modal('show');
 }
 
-function eliminar(sem_id){
+function eliminar(prof_id){
     Swal.fire({
         title: 'Eliminar!',
         text: 'Desea eleminar el Registro?',
@@ -117,8 +125,8 @@ function eliminar(sem_id){
         cancelButtonText: 'Cancelar',
     }).then((result)=>{
         if(result.value){
-            $.post("/ISUM/controller/semillero.php?opc=eliminar",{sem_id:sem_id},function (data){
-                $('#semillero_data').DataTable().ajax.reload();
+            $.post("/ISUM/controller/profesor.php?opc=eliminar",{prof_id:prof_id},function (data){
+                $('#profesor_data').DataTable().ajax.reload();
                 Swal.fire({
                     title: 'Correcto!',
                     text: 'Se Elimino Correctamente',
@@ -131,10 +139,14 @@ function eliminar(sem_id){
 
 }
 
-function select_profesor(){
-    $.post("/ISUM/controller/profesor.php?opc=combo",function (data){
-        $('#prof_id').html(data);
+function combo_rol(){
+    $.post("/ISUM/controller/rol.php?opc=combo", function (data) {
+        $('#rol_id').html(data);
     });
 }
-
+function combo_escalfon(){
+    $.post("/ISUM/controller/escalafon.php?opc=combo", function (data) {
+        $('#esc_id').html(data);
+    });
+}
 init();

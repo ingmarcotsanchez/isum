@@ -1,7 +1,7 @@
 var usu_id = $('#usu_idx').val();
 
 function init(){
-    $("#semillero_form").on("submit",function(e){
+    $("#productos_form").on("submit",function(e){
         guardaryeditar(e);
     });
 
@@ -10,10 +10,10 @@ function init(){
 function guardaryeditar(e){
     //console.log("prueba");
     e.preventDefault();
-    var formData = new FormData($("#semillero_form")[0]);
+    var formData = new FormData($("#productos_form")[0]);
     //console.log(formData);
     $.ajax({
-        url: "/ISUM/controller/semillero.php?opc=guardaryeditar",
+        url: "/ISUM/controller/producto.php?opc=guardaryeditar",
         type: "POST",
         data: formData,
         contentType: false,
@@ -21,8 +21,8 @@ function guardaryeditar(e){
         
         success: function(data){
             console.log(data);
-            $('#semillero_data').DataTable().ajax.reload();
-            $('#modalcrearSemillero').modal('hide');
+            $('#productos_data').DataTable().ajax.reload();
+            $('#modalcrearProducto').modal('hide');
 
             Swal.fire({
                 title: 'Correcto!',
@@ -36,12 +36,16 @@ function guardaryeditar(e){
 
 $(document).ready(function(){
     $('#prof_id').select2({
-        dropdownParent: $("#modalcrearSemillero")
+        dropdownParent: $("#modalcrearProducto")
+    });
+    $('#sem_id').select2({
+        dropdownParent: $("#modalcrearProducto")
     });
 
     select_profesor();
+    select_semillero();
 
-    $('#semillero_data').DataTable({
+    $('#productos_data').DataTable({
         "aProcessing": true,
         "aServerSide": true,
         dom: 'Bfrtip',
@@ -50,7 +54,7 @@ $(document).ready(function(){
             'csvHtml5',
         ],
         "ajax":{
-            url:"/ISUM/controller/semillero.php?opc=listar",
+            url:"/ISUM/controller/producto.php?opc=listar",
             type:"post"
         },
         "bDestroy": true,
@@ -87,27 +91,27 @@ $(document).ready(function(){
 });
 
 function nuevo(){
-    $('#titulo_modal').html('Nuevo Semillero');
-    $('#semillero_form')[0].reset();
-    //select_profesor();
-    $('#modalcrearSemillero').modal('show');
+    $('#titulo_modal').html('Nuevo Producto');
+    $('#productos_form')[0].reset();
+    $('#modalcrearProducto').modal('show');
 }
 
-function editar(sem_id){
-    $.post("/ISUM/controller/semillero.php?opc=mostrar",{sem_id:sem_id},function (data){
+function editar(prod_id){
+    $.post("/ISUM/controller/producto.php?opc=mostrar",{prod_id:prod_id},function (data){
         data = JSON.parse(data);
-        console.log(data);
-        $('#sem_id').val(data.sem_id);
-        $('#sem_nom').val(data.sem_nom);
-        $('#sem_anno').val(data.sem_anno);
+        //console.log(data);
+        $('#prod_id').val(data.prod_id);
+        $('#prod_nom').val(data.prod_nom);
+        $('#prod_tipo').val(data.prod_tipo);
+        $('#prod_anno').val(data.prod_anno);
+        $('#sem_id').val(data.sem_id).trigger('change');
         $('#prof_id').val(data.prof_id).trigger('change');
-        $('#sem_linea').val(data.sem_linea);
     });
-    $('#titulo_modal').html('Editar Semillero');
-    $('#modalcrearSemillero').modal('show');
+    $('#titulo_modal').html('Editar Producto');
+    $('#modalcrearProducto').modal('show');
 }
 
-function eliminar(sem_id){
+function eliminar(prod_id){
     Swal.fire({
         title: 'Eliminar!',
         text: 'Desea eleminar el Registro?',
@@ -117,8 +121,8 @@ function eliminar(sem_id){
         cancelButtonText: 'Cancelar',
     }).then((result)=>{
         if(result.value){
-            $.post("/ISUM/controller/semillero.php?opc=eliminar",{sem_id:sem_id},function (data){
-                $('#semillero_data').DataTable().ajax.reload();
+            $.post("/ISUM/controller/producto.php?opc=eliminar",{prod_id:prod_id},function (data){
+                $('#productos_data').DataTable().ajax.reload();
                 Swal.fire({
                     title: 'Correcto!',
                     text: 'Se Elimino Correctamente',
@@ -130,11 +134,14 @@ function eliminar(sem_id){
     });
 
 }
-
 function select_profesor(){
     $.post("/ISUM/controller/profesor.php?opc=combo",function (data){
         $('#prof_id').html(data);
     });
 }
-
+function select_semillero(){
+    $.post("/ISUM/controller/semillero.php?opc=combo",function (data){
+        $('#sem_id').html(data);
+    });
+}
 init();

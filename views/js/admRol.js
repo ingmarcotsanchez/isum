@@ -1,7 +1,7 @@
 var usu_id = $('#usu_idx').val();
 
 function init(){
-    $("#semillero_form").on("submit",function(e){
+    $("#rol_form").on("submit",function(e){
         guardaryeditar(e);
     });
 
@@ -10,10 +10,10 @@ function init(){
 function guardaryeditar(e){
     //console.log("prueba");
     e.preventDefault();
-    var formData = new FormData($("#semillero_form")[0]);
+    var formData = new FormData($("#rol_form")[0]);
     //console.log(formData);
     $.ajax({
-        url: "/ISUM/controller/semillero.php?opc=guardaryeditar",
+        url: "/ISUM/controller/rol.php?opc=guardaryeditar",
         type: "POST",
         data: formData,
         contentType: false,
@@ -21,8 +21,8 @@ function guardaryeditar(e){
         
         success: function(data){
             console.log(data);
-            $('#semillero_data').DataTable().ajax.reload();
-            $('#modalcrearSemillero').modal('hide');
+            $('#rol_data').DataTable().ajax.reload();
+            $('#modalcrearRol').modal('hide');
 
             Swal.fire({
                 title: 'Correcto!',
@@ -35,13 +35,7 @@ function guardaryeditar(e){
 }
 
 $(document).ready(function(){
-    $('#prof_id').select2({
-        dropdownParent: $("#modalcrearSemillero")
-    });
-
-    select_profesor();
-
-    $('#semillero_data').DataTable({
+    $('#rol_data').DataTable({
         "aProcessing": true,
         "aServerSide": true,
         dom: 'Bfrtip',
@@ -50,7 +44,7 @@ $(document).ready(function(){
             'csvHtml5',
         ],
         "ajax":{
-            url:"/ISUM/controller/semillero.php?opc=listar",
+            url:"/ISUM/controller/rol.php?opc=listar",
             type:"post"
         },
         "bDestroy": true,
@@ -87,27 +81,23 @@ $(document).ready(function(){
 });
 
 function nuevo(){
-    $('#titulo_modal').html('Nuevo Semillero');
-    $('#semillero_form')[0].reset();
-    //select_profesor();
-    $('#modalcrearSemillero').modal('show');
+    $('#titulo_modal').html('Nuevo Rol');
+    $('#rol_form')[0].reset();
+    $('#modalcrearRol').modal('show');
 }
 
-function editar(sem_id){
-    $.post("/ISUM/controller/semillero.php?opc=mostrar",{sem_id:sem_id},function (data){
+function editar(rol_id){
+    $.post("/ISUM/controller/rol.php?opc=mostrar",{rol_id:rol_id},function (data){
         data = JSON.parse(data);
-        console.log(data);
-        $('#sem_id').val(data.sem_id);
-        $('#sem_nom').val(data.sem_nom);
-        $('#sem_anno').val(data.sem_anno);
-        $('#prof_id').val(data.prof_id).trigger('change');
-        $('#sem_linea').val(data.sem_linea);
+        //console.log(data);
+        $('#rol_id').val(data.rol_id);
+        $('#rol_nombre').val(data.rol_nombre);
     });
-    $('#titulo_modal').html('Editar Semillero');
-    $('#modalcrearSemillero').modal('show');
+    $('#titulo_modal').html('Editar Rol');
+    $('#modalcrearRol').modal('show');
 }
 
-function eliminar(sem_id){
+function eliminar(rol_id){
     Swal.fire({
         title: 'Eliminar!',
         text: 'Desea eleminar el Registro?',
@@ -117,8 +107,8 @@ function eliminar(sem_id){
         cancelButtonText: 'Cancelar',
     }).then((result)=>{
         if(result.value){
-            $.post("/ISUM/controller/semillero.php?opc=eliminar",{sem_id:sem_id},function (data){
-                $('#semillero_data').DataTable().ajax.reload();
+            $.post("/ISUM/controller/rol.php?opc=eliminar",{rol_id:rol_id},function (data){
+                $('#rol_data').DataTable().ajax.reload();
                 Swal.fire({
                     title: 'Correcto!',
                     text: 'Se Elimino Correctamente',
@@ -129,12 +119,6 @@ function eliminar(sem_id){
         }
     });
 
-}
-
-function select_profesor(){
-    $.post("/ISUM/controller/profesor.php?opc=combo",function (data){
-        $('#prof_id').html(data);
-    });
 }
 
 init();

@@ -61,7 +61,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label>Rol</label>
-                                <select class="form-control select2" style="width:100%" name="rol_id" id="rol_id" data-placeholder="Seleccione">
+                                <select class="form-control select2" style="width:100%" name="usu_rol" id="usu_rol" data-placeholder="Seleccione">
                                     <option label="Seleccione un rol"></option>
                                 </select>
                             </div>

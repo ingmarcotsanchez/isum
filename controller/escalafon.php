@@ -45,6 +45,16 @@
                     "aaData"=>$data);
                 echo json_encode($results);
                 break;
+        case "combo":
+            $datos=$escalafon->escalafon();
+            if(is_array($datos)==true and count($datos)>0){
+                $html= " <option label='Seleccione'></option>";
+                foreach($datos as $row){
+                    $html.= "<option value='".$row['esc_id']."'>".$row['esc_nombre']."</option>";
+                }
+                echo $html;
+            }
+            break;
             
      
     }

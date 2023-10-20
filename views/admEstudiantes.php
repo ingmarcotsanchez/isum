@@ -1,5 +1,8 @@
 <?php
 define( "BASE_URL", "/ISUM/views/");
+/* Llamamos al archivo de conexion.php */
+require_once("../config/conexion.php");
+if(isset($_SESSION["usu_id"])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +10,7 @@ define( "BASE_URL", "/ISUM/views/");
   <?php
     include("modulos/head.php");
   ?>
-  <title>Proyecto | Reportes</title>
+  <title>ISUM | Estudiantes</title>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -33,7 +36,33 @@ define( "BASE_URL", "/ISUM/views/");
 
             <section class="content">
                 <div class="container-fluid">
-                    <h1>Estudiantes</h1>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Admón Estudiantes</h3>
+                        </div>
+                        <div class="card-body">
+                            <button type="button" class="btn btn-outline-primary mb-2" onclick="nuevo()">Crear Estudiante</button>
+                            <button type="button" class="btn btn-outline-secondary mb-2">Cargar Planilla</button>
+                            <table id="estudiante_data" class="table display responsive nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Apellido Paterno</th>
+                                        <th>Apellido Materno</th>
+                                        <th>Correo</th>
+                                        <th>Sexo</th>
+                                        <th>Teléfono</th>
+                                        <th>semestre</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -43,14 +72,14 @@ define( "BASE_URL", "/ISUM/views/");
         ?>
     </div>
     <!-- /.Site warapper -->
-    <?php
-    include("modulos/js.php");
-    ?>
-
-    <script>
-    $(document).ready(function () {
-        $('#example').DataTable();
-    });
-    </script>
+    <?php require_once("admEstudiantesModal.php"); ?>
+    <?php include("modulos/js.php"); ?>
+    <script type="text/javascript" src="js/admEstudiantes.js"></script>
 </body>
 </html>
+<?php
+  }else{
+    /* Si no a iniciado sesion se redireccionada a la ventana principal */
+   header("Location:".Conectar::ruta()."views/404.php");
+ }
+?>

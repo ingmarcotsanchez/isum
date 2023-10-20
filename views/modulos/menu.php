@@ -47,7 +47,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?php echo BASE_URL; ?>admUsuarios.php" class="nav-link">
+                <a href="<?php echo BASE_URL; ?>admProfesor.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Profesores</p>
                 </a>
@@ -56,6 +56,12 @@
                 <a href="<?php echo BASE_URL; ?>admEscalafon.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Escalafón</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo BASE_URL; ?>admRol.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Roles</p>
                 </a>
               </li>
             </ul>

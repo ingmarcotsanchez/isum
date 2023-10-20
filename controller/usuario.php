@@ -40,7 +40,7 @@
                 //$curso es la variable que tenemos inicializada, los metodos son los que creamos en el archivo de models
                 $usuario->insert_usuario($_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["usu_sex"],$_POST["rol_id"],$_POST["usu_tel"],$_POST["esc_id"],$_POST["usu_fecfin"]);
             }else{
-                $usuario->update_usuario($_POST["usu_id"],$_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_pass"],$_POST["usu_sex"],$_POST["usu_tel"],$_POST["esc_id"],$_POST["usu_fecfin"]);
+                $usuario->update_usuario($_POST["usu_id"],$_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_pass"],$_POST["usu_sex"],$_POST["usu_rol"],$_POST["usu_tel"],$_POST["esc_id"],$_POST["usu_fecfin"]);
             }
             break;
         case "mostrar":
@@ -53,7 +53,7 @@
                     $output["usu_apem"] = $row["usu_apem"];
                     $output["usu_correo"] = $row["usu_correo"];
                     $output["usu_sex"] = $row["usu_sex"];
-                    $output["rol_id"] = $row["rol_id"];
+                    $output["usu_rol"] = $row["usu_rol"];
                     $output["usu_tel"] = $row["usu_tel"];
                     $output["esc_id"] = $row["esc_id"];
                     $output["usu_fecini"] = $row["usu_fecini"];

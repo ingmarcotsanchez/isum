@@ -10,7 +10,7 @@ if(isset($_SESSION["usu_id"])){
   <?php
     include("modulos/head.php");
   ?>
-  <title>ISUM | Proyectos</title>
+  <title>ISUM | Roles</title>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -38,18 +38,14 @@ if(isset($_SESSION["usu_id"])){
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Admón Proyectos</h3>
+                            <h3 class="card-title">Admón Roles</h3>
                         </div>
                         <div class="card-body">
-                            <button type="button" class="btn btn-outline-primary mb-2" onclick="nuevo()">Crear Proyecto</button>
-                            <table id="proyectos_data" class="table display responsive nowrap">
+                            <button type="button" class="btn btn-outline-primary mb-2" onclick="nuevo()">Crear Rol</button>
+                            <table id="rol_data" class="table display responsive nowrap">
                                 <thead>
                                     <tr>
-                                        <th>Proyectos</th>
-                                        <th>Año</th>
-                                        <th>Líder</th>
-                                        <th>Presupuesto</th>
-                                        <th>Programas</th>
+                                        <th>Rol</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -69,9 +65,9 @@ if(isset($_SESSION["usu_id"])){
         ?>
     </div>
     <!-- /.Site warapper -->
-    <?php require_once("admProyectoModal.php"); ?>
+    <?php require_once("admRolModal.php"); ?>
     <?php include("modulos/js.php"); ?>
-    <script type="text/javascript" src="js/admProyectos.js"></script>
+    <script type="text/javascript" src="js/admRol.js"></script>
 </body>
 </html>
 <?php

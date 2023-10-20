@@ -2,6 +2,8 @@
 define( "BASE_URL", "/ISUM/views/");
 /* Llamamos al archivo de conexion.php */
 require_once("../config/conexion.php");
+require_once("../models/Usuario.php");
+require_once("../models/Info.php");
 if(isset($_SESSION["usu_id"])){
 ?>
 
@@ -11,7 +13,7 @@ if(isset($_SESSION["usu_id"])){
   <?php
     include("modulos/head.php");
   ?>
-  <title>Proyecto | Home</title>
+  <title>ISUM | Home</title>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -100,9 +102,12 @@ if(isset($_SESSION["usu_id"])){
         </div>
         <!-- /.row -->
       </div>
-      <div class="row">
-        <div class="col-12">
-          <div id="chart_div"></div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div id="chart_div"></div>
+          </div>
         </div>
       </div>
     </section>
