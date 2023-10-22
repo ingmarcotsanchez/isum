@@ -24,6 +24,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+          <li class="nav-header">INFORMACIÓN</li>
           <li class="nav-item">
             <a href="<?php echo BASE_URL; ?>inicio.php" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
@@ -37,6 +38,7 @@
               <p>Perfil</p>
             </a>
           </li>
+          <li class="nav-header">BÁSICAS</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -104,6 +106,12 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="<?php echo BASE_URL; ?>admSemestre.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Semestres</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="<?php echo BASE_URL; ?>admAsignaturas.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -124,20 +132,6 @@
               </li>
             </ul>
           </li>
-          <li class="nav-header">REPORTES</li>
-          <li class="nav-item">
-            <a href="<?php echo BASE_URL; ?>admReportes.php" class="nav-link">
-              <i class="nav-icon far fa-calendar-alt"></i>
-              <p>
-                Reporte
-              </p>
-            </a>
-          </li>
-          
-          
-          
-          
-         
           <li class="nav-header">LOGOUT</li>
           <li class="nav-item">
             <a href="<?php echo BASE_URL; ?>Logout.php" class="nav-link">
