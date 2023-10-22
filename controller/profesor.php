@@ -93,6 +93,9 @@
                 echo $html;
             }
             break;
+        case "guardar_desde_excel":
+            $profesor->insert_profesor($_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"]);
+            break;
         
             
      

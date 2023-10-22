@@ -105,8 +105,11 @@ if(isset($_SESSION["usu_id"])){
 
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12">
-            <div id="chart_div"></div>
+          <div class="col-6">
+            <div id="piechart"></div>
+          </div>
+          <div class="col-6">
+            <div id="columnchart_material"></div>
           </div>
         </div>
       </div>
@@ -122,48 +125,11 @@ if(isset($_SESSION["usu_id"])){
   include("modulos/js.php");
 ?>
 <script type="text/javascript" src="js/inicio.js"></script>
-<script>
-  google.charts.load('current', {packages: ['corechart', 'bar']});
-google.charts.setOnLoadCallback(drawColColors);
+<script type="text/javascript" src="js/inicio/torta.js"></script>
+<script type="text/javascript" src="js/inicio/barras.js"></script>
 
-function drawColColors() {
-      var data = new google.visualization.DataTable();
-      data.addColumn('timeofday', 'Time of Day');
-      data.addColumn('number', '1er Semestre');
-      data.addColumn('number', '2do Semestre');
 
-      data.addRows([
-        [{v: [8, 0, 0], f: '2017'}, 0, 9],
-        [{v: [9, 0, 0], f: '2018'}, 24, 10],
-        [{v: [10, 0, 0], f:'2019'}, 10, 8],
-        [{v: [11, 0, 0], f: '2020'}, 18, 6],
-        [{v: [12, 0, 0], f: '2021'}, 26, 18],
-        [{v: [13, 0, 0], f: '2022'}, 22, 37],
-        [{v: [14, 0, 0], f: '2023'}, 37, 0],
-      ]);
-
-      var options = {
-        title: 'Número de Estudiantes por semestre',
-        colors: ['#9575cd', '#33ac71'],
-        hAxis: {
-          title: 'Año',
-          format: 'YYYY-S',
-          viewWindow: {
-            min: [5, 30, 0],
-            max: [17, 30, 0]
-          }
-        },
-        vAxis: {
-          title: 'Cantidad'
-        }
-      };
-
-      
-
-      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-      chart.draw(data, options);
-    }
-</script>
+  
 </body>
 </html>
 <?php

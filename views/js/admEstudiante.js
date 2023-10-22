@@ -1,7 +1,7 @@
 var usu_id = $('#usu_idx').val();
 
 function init(){
-    $("#profesor_form").on("submit",function(e){
+    $("#estudiante_form").on("submit",function(e){
         guardaryeditar(e);
     });
 
@@ -10,10 +10,10 @@ function init(){
 function guardaryeditar(e){
     //console.log("prueba");
     e.preventDefault();
-    var formData = new FormData($("#profesor_form")[0]);
+    var formData = new FormData($("#estudiante_form")[0]);
     //console.log(formData);
     $.ajax({
-        url: "/ISUM/controller/profesor.php?opc=guardaryeditar",
+        url: "/ISUM/controller/estudiante.php?opc=guardaryeditar",
         type: "POST",
         data: formData,
         contentType: false,
@@ -21,8 +21,8 @@ function guardaryeditar(e){
         
         success: function(data){
             console.log(data);
-            $('#profesor_data').DataTable().ajax.reload();
-            $('#modalcrearProfesor').modal('hide');
+            $('#estudiante_data').DataTable().ajax.reload();
+            $('#modalcrearEstudiante').modal('hide');
 
             Swal.fire({
                 title: 'Correcto!',
@@ -35,17 +35,8 @@ function guardaryeditar(e){
 }
 
 $(document).ready(function(){
-    $('#rol_id').select2({
-        dropdownParent: $('#modalcrearProfesor')
-    });
-    $('#esc_id').select2({
-        dropdownParent: $('#modalcrearProfesor')
-    });
 
-    combo_rol();
-    combo_escalfon();
-
-    $('#profesor_data').DataTable({
+    $('#estudiante_data').DataTable({
         "aProcessing": true,
         "aServerSide": true,
         dom: 'Bfrtip',
@@ -54,7 +45,7 @@ $(document).ready(function(){
             'csvHtml5',
         ],
         "ajax":{
-            url:"/ISUM/controller/profesor.php?opc=listar",
+            url:"/ISUM/controller/estudiante.php?opc=listar",
             type:"post"
         },
         "bDestroy": true,
@@ -91,31 +82,29 @@ $(document).ready(function(){
 });
 
 function nuevo(){
-    $('#titulo_modal').html('Nuevo Profesor');
-    $('#profesor_form')[0].reset();
-    $('#modalcrearProfesor').modal('show');
+    $('#titulo_modal').html('Nuevo Estudiante');
+    $('#estudiante_form')[0].reset();
+    $('#modalcrearEstudiante').modal('show');
 }
 
-function editar(prof_id){
-    $.post("/ISUM/controller/profesor.php?opc=mostrar",{prof_id:prof_id},function (data){
+function editar(est_id){
+    $.post("/ISUM/controller/estudiante.php?opc=mostrar",{est_id:est_id},function (data){
         data = JSON.parse(data);
         //console.log(data);
-        $('#prof_id').val(data.prof_id);
-        $('#prof_nom').val(data.prof_nom);
-        $('#prof_apep').val(data.prof_apep);
-        $('#prof_apem').val(data.prof_apem);
-        $('#prof_correo').val(data.prof_correo);
-        $('#prof_niv').val(data.prof_niv);
-        $('#prof_sex').val(data.prof_sex);
-        $('#prof_telf').val(data.prof_telf);
-        $('#rol_id').val(data.rol_id).trigger('change');
-        $('#esc_id').val(data.esc_id).trigger('change');
+        $('#est_id').val(data.est_id);
+        $('#est_nom').val(data.est_nom);
+        $('#est_apep').val(data.est_apep);
+        $('#est_apem').val(data.est_apem);
+        $('#est_correo').val(data.est_correo);
+        $('#est_sex').val(data.est_sex);
+        $('#est_telf').val(data.est_telf);
+        $('#est_seme').val(data.est_seme);
     });
-    $('#titulo_modal').html('Editar Profesor');
-    $('#modalcrearProfesor').modal('show');
+    $('#titulo_modal').html('Editar Estudiante');
+    $('#modalcrearEstudiante').modal('show');
 }
 
-function eliminar(prof_id){
+function eliminar(est_id){
     Swal.fire({
         title: 'Eliminar!',
         text: 'Desea eleminar el Registro?',
@@ -125,8 +114,8 @@ function eliminar(prof_id){
         cancelButtonText: 'Cancelar',
     }).then((result)=>{
         if(result.value){
-            $.post("/ISUM/controller/profesor.php?opc=eliminar",{prof_id:prof_id},function (data){
-                $('#profesor_data').DataTable().ajax.reload();
+            $.post("/ISUM/controller/estudiante.php?opc=eliminar",{est_id:est_id},function (data){
+                $('#estudiante_data').DataTable().ajax.reload();
                 Swal.fire({
                     title: 'Correcto!',
                     text: 'Se Elimino Correctamente',
@@ -139,19 +128,8 @@ function eliminar(prof_id){
 
 }
 
-function combo_rol(){
-    $.post("/ISUM/controller/rol.php?opc=combo", function (data) {
-        $('#rol_id').html(data);
-    });
-}
-function combo_escalfon(){
-    $.post("/ISUM/controller/escalafon.php?opc=combo", function (data) {
-        $('#esc_id').html(data);
-    });
-}
-
 $(document).on("click", "#btnplantilla", function () {
-    $('#modalProfesor').modal('show');
+    $('#modalEstudiante').modal('show');
 });
 
 var ExcelToJSON = function() {
@@ -168,23 +146,21 @@ var ExcelToJSON = function() {
                 // Here is your object
                 var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
                 var json_object = JSON.stringify(XL_row_object);
-                ProfesorList = JSON.parse(json_object);
+                EstudianteList = JSON.parse(json_object);
 
-                console.log(ProfesorList)
-                for (i = 0; i < ProfesorList.length; i++) {
+                console.log(EstudianteList)
+                for (i = 0; i < EstudianteList.length; i++) {
 
-                    var columns = Object.values(ProfesorList[i])
+                    var columns = Object.values(EstudianteList[i])
 
-                    $.post("/ISUM/controller/profesor.php?opc=guardar_desde_excel",{
-                        prof_nom : columns[0],
-                        prof_apep : columns[1],
-                        prof_apem : columns[2],
-                        prof_correo : columns[3],
-                        prof_nivel : columns[4],
-                        prof_sex : columns[5],
-                        prof_telf :columns[6],
-                        rol_id :columns[7],
-                        esc_id :columns[8]
+                    $.post("/ISUM/controller/estudiante.php?opc=guardar_desde_excel",{
+                        est_nom : columns[0],
+                        est_apep : columns[1],
+                        est_apem : columns[2],
+                        est_correo : columns[3],
+                        est_sex : columns[4],
+                        est_telf :columns[5],
+                        est_seme : columns[6]
                     }, function (data) {
                         console.log(data);
                     });
@@ -194,8 +170,8 @@ var ExcelToJSON = function() {
                 document.getElementById("upload").value=null;
 
                 /* TODO: Actualizar Datatable JS */
-                $('#profesor_data').DataTable().ajax.reload();
-                $('#modalProfesor').modal('hide');
+                $('#estudiante_data').DataTable().ajax.reload();
+                $('#modalEstudiante').modal('hide');
             })
         };
         reader.onerror = function(ex) {
@@ -213,5 +189,6 @@ function handleFileSelect(evt) {
 }
 
 document.getElementById('upload').addEventListener('change', handleFileSelect, false);
+
 
 init();

@@ -1,59 +1,75 @@
 <?php
     require_once("../config/conexion.php");
     require_once("../models/Asignaturas.php");
-    $asignatura = new asignatura();
+    $asignatura = new Asignatura();
 
     switch($_GET["opc"]){
-        
         case "guardaryeditar":
-            if(empty($_POST["cal_id"])){
-                $asignatura->insert_asignatura($_POST["cal_alfa"],$_POST["cal_nrc"],$_POST["cal_asig"],$_POST["cal_cred"],$_POST["cal_hor"],$_POST["cal_sem"]);
-            }else{
-                $asignatura->update_asignatura($_POST["cal_id"],$_POST["cal_alfa"],$_POST["cal_nrc"],$_POST["cal_asig"],$_POST["cal_cred"],$_POST["cal_hor"],$_POST["cal_sem"]);
-            }
-            break;
-        case "mostrar":
-            $datos = $asignatura->asignatura_id($_POST["cal_id"]);
-            if(is_array($datos)==true and count($datos)<>0){
-                foreach($datos as $row){
-
-                    $output["cal_alfa"] = $row["cal_alfa"];
-                    $output["cal_nrc"] = $row["cal_nrc"];
-                    $output["cal_asig"] = $row["cal_asig"];
-                    $output["cal_cred"] = $row["cal_cred"];
-                    $output["cal_hor"] = $row["cal_hor"];
-                    $output["cal_sem"] = $row["cal_sem"];
+                if(empty($_POST["asig_id"])){
+                    $asignatura->insert_asignatura($_POST["asig_nom"],$_POST["asig_alfa"],$_POST["asig_nrc"],$_POST["asig_cred"],$_POST["asig_horas"],$_POST["seme_id"]);
+                }else{
+                    $asignatura->update_asignatura($_POST["asig_id"], $_POST["asig_nom"],$_POST["asig_alfa"],$_POST["asig_nrc"],$_POST["asig_cred"],$_POST["asig_horas"],$_POST["seme_id"]);
                 }
-                echo json_encode($output);
-            }
-            break;
+                break;
+        case "mostrar":
+                $datos = $asignatura->asignaturas_id($_POST["asig_id"]);
+                if(is_array($datos)==true and count($datos)<>0){
+                    foreach($datos as $row){
+                        $output["asig_id"] = $row["asig_id"];
+                        $output["asig_nom"] = $row["asig_nom"];
+                        $output["asig_alfa"] = $row["asig_alfa"];
+                        $output["asig_nrc"] = $row["asig_nrc"];
+                        $output["asig_cred"] = $row["asig_cred"];
+                        $output["asig_horas"] = $row["asig_horas"];
+                        $output["seme_id"] = $row["seme_id"];
+                    }
+                    echo json_encode($output);
+                }
+                break;
         case "eliminar":
-            $asignatura->delete_asignatura($_POST["cal_id"]);
-            break;
+                $asignatura->delete_asignatura($_POST["asig_id"]);
+                break;
         case "listar":
-            $datos=$asignatura->asignatura();
-            $data=Array();
-            foreach($datos as $row){
-                $sub_array = array();
-
-                $sub_array[] = $row["cal_alfa"];
-                $sub_array[] = $row["cal_nrc"];
-                $sub_array[] = $row["cal_asig"];
-                $sub_array[] = $row["cal_cred"];
-                $sub_array[] = $row["cal_hor"];
-                $sub_array[] = $row["cal_sem"]; 
-                $sub_array[] = '<button type="button" onClick="editar('.$row["cal_id"].');"  id="'.$row["cal_id"].'" class="btn btn-outline-success btn-icon"><i class="bx bx-edit-alt"></i></button>';
-                $sub_array[] = '<button type="button" onClick="eliminar('.$row["cal_id"].');"  id="'.$row["cal_id"].'" class="btn btn-outline-danger btn-icon"><i class="bx bx-trash"></i></button>';
+                $datos=$asignatura->asignaturas2();
+                $data=Array();
+                foreach($datos as $row){
+                    $sub_array = array();
+                    //columnas de las tablas a mostrar segun select del modelo
+                    $sub_array[] = $row["asig_nom"];
+                    $sub_array[] = $row["asig_alfa"];
+                    $sub_array[] = $row["asig_nrc"];
+                    $sub_array[] = $row["asig_cred"];
+                    $sub_array[] = $row["asig_horas"];
+                    $sub_array[] = $row["seme_nombre"];
                 
-                $data[] = $sub_array;
+                    $sub_array[] = '<button type="button" onClick="editar('.$row["asig_id"].');"  id="'.$row["asig_id"].'" class="btn btn-outline-success btn-icon"><i class="bx bx-edit-alt"></i></button>';
+                    $sub_array[] = '<button type="button" onClick="eliminar('.$row["asig_id"].');"  id="'.$row["asig_id"].'" class="btn btn-outline-danger btn-icon"><i class="bx bx-trash"></i></button>';
+                    
+                    $data[] = $sub_array;
+                }
+                /*Formato del datatable, se usa siempre*/
+                $results = array(
+                    "sEcho"=>1,
+                    "iTotalRecords"=>count($data),
+                    "iTotalDisplayRecords"=>count($data),
+                    "aaData"=>$data);
+                echo json_encode($results);
+                break;
+        case "combo":
+            $datos=$asignatura->asignaturas();
+            if(is_array($datos)==true and count($datos)>0){
+                $html= " <option label='Seleccione'></option>";
+                foreach($datos as $row){
+                    $html.= "<option value='".$row['asig_id']."'>".$row['asig_nom']." ".$row['asig_alfa']." ".$row['asig_nrc']."</option>";
+                }
+                echo $html;
             }
-            /*Formato del datatable, se usa siempre*/
-            $results = array(
-                "sEcho"=>1,
-                "iTotalRecords"=>count($data),
-                "iTotalDisplayRecords"=>count($data),
-                "aaData"=>$data);
-            echo json_encode($results);
             break;
+        case "guardar_desde_excel":
+            $asignatura->insert_asignatura($_POST["asig_nom"],$_POST["asig_alfa"],$_POST["asig_nrc"],$_POST["asig_cred"],$_POST["asig_horas"],$_POST["seme_id"]);
+            break;
+        
+            
+     
     }
-?> 
+?>

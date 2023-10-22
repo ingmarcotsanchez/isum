@@ -10,7 +10,7 @@ if(isset($_SESSION["usu_id"])){
   <?php
     include("modulos/head.php");
   ?>
-  <title>ISUM | Asignatura </title>
+  <title>ISUM | Asignaturas</title>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -41,15 +41,15 @@ if(isset($_SESSION["usu_id"])){
                             <h3 class="card-title">Admón Asignaturas</h3>
                         </div>
                         <div class="card-body">
-                            <button type="button" class="btn btn-outline-primary mb-2" onclick="nuevo()">Crear Asignaturas</button>
-                            <button type="button" class="btn btn-outline-secondary mb-2">Cargar Planilla</button>
+                            <button type="button" class="btn btn-outline-primary mb-2" onclick="nuevo()">Crear Asignatura</button>
+                            <button type="button" class="btn btn-outline-secondary mb-2" id="btnplantilla">Cargar Planilla</button>
                             <table id="asignatura_data" class="table display responsive nowrap">
                                 <thead>
                                     <tr>
-                                        <th>Alfanumerico</th>
-                                        <th>NRC</th>
                                         <th>Asignatura</th>
-                                        <th>Creditos</th>
+                                        <th>Alfanúmerico</th>
+                                        <th>NRC</th>
+                                        <th>Créditos</th>
                                         <th>Horas</th>
                                         <th>Semestre</th>
                                         <th></th>
@@ -72,8 +72,11 @@ if(isset($_SESSION["usu_id"])){
     </div>
     <!-- /.Site warapper -->
     <?php require_once("admAsignaturasModal.php"); ?>
+    <?php require_once("admAsignaturaPlantilla.php"); ?>
     <?php include("modulos/js.php"); ?>
-    <script type="text/javascript" src="js/admAsignaturas.js"></script>
+    <script type="text/javascript" src="js/admAsignatura.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
 </body>
 </html>
 <?php

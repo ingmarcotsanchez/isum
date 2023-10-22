@@ -1,7 +1,7 @@
 var usu_id = $('#usu_idx').val();
 
 function init(){
-    $("#profesor_form").on("submit",function(e){
+    $("#asignatura_form").on("submit",function(e){
         guardaryeditar(e);
     });
 
@@ -10,10 +10,10 @@ function init(){
 function guardaryeditar(e){
     //console.log("prueba");
     e.preventDefault();
-    var formData = new FormData($("#profesor_form")[0]);
+    var formData = new FormData($("#asignatura_form")[0]);
     //console.log(formData);
     $.ajax({
-        url: "/ISUM/controller/profesor.php?opc=guardaryeditar",
+        url: "/ISUM/controller/asignatura.php?opc=guardaryeditar",
         type: "POST",
         data: formData,
         contentType: false,
@@ -21,8 +21,8 @@ function guardaryeditar(e){
         
         success: function(data){
             console.log(data);
-            $('#profesor_data').DataTable().ajax.reload();
-            $('#modalcrearProfesor').modal('hide');
+            $('#asignatura_data').DataTable().ajax.reload();
+            $('#modalcrearAsignatura').modal('hide');
 
             Swal.fire({
                 title: 'Correcto!',
@@ -35,17 +35,13 @@ function guardaryeditar(e){
 }
 
 $(document).ready(function(){
-    $('#rol_id').select2({
-        dropdownParent: $('#modalcrearProfesor')
-    });
-    $('#esc_id').select2({
-        dropdownParent: $('#modalcrearProfesor')
+    $('#seme_id').select2({
+        dropdownParent: $('#modalcrearAsignatura')
     });
 
-    combo_rol();
-    combo_escalfon();
+    combo_semestres();
 
-    $('#profesor_data').DataTable({
+    $('#asignatura_data').DataTable({
         "aProcessing": true,
         "aServerSide": true,
         dom: 'Bfrtip',
@@ -54,7 +50,7 @@ $(document).ready(function(){
             'csvHtml5',
         ],
         "ajax":{
-            url:"/ISUM/controller/profesor.php?opc=listar",
+            url:"/ISUM/controller/asignatura.php?opc=listar",
             type:"post"
         },
         "bDestroy": true,
@@ -91,31 +87,28 @@ $(document).ready(function(){
 });
 
 function nuevo(){
-    $('#titulo_modal').html('Nuevo Profesor');
-    $('#profesor_form')[0].reset();
-    $('#modalcrearProfesor').modal('show');
+    $('#titulo_modal').html('Nueva Asignatura');
+    $('#asignatura_form')[0].reset();
+    $('#modalcrearAsignatura').modal('show');
 }
 
-function editar(prof_id){
-    $.post("/ISUM/controller/profesor.php?opc=mostrar",{prof_id:prof_id},function (data){
+function editar(asig_id){
+    $.post("/ISUM/controller/asignatura.php?opc=mostrar",{asig_id:asig_id},function (data){
         data = JSON.parse(data);
         //console.log(data);
-        $('#prof_id').val(data.prof_id);
-        $('#prof_nom').val(data.prof_nom);
-        $('#prof_apep').val(data.prof_apep);
-        $('#prof_apem').val(data.prof_apem);
-        $('#prof_correo').val(data.prof_correo);
-        $('#prof_niv').val(data.prof_niv);
-        $('#prof_sex').val(data.prof_sex);
-        $('#prof_telf').val(data.prof_telf);
-        $('#rol_id').val(data.rol_id).trigger('change');
-        $('#esc_id').val(data.esc_id).trigger('change');
+        $('#asig_id').val(data.asig_id);
+        $('#asig_nom').val(data.asig_nom);
+        $('#asig_alfa').val(data.asig_alfa);
+        $('#asig_nrc').val(data.asig_nrc);
+        $('#asig_cred').val(data.asig_cred);
+        $('#asig_horas').val(data.asig_horas);
+        $('#seme_id').val(data.seme_id).trigger('change');
     });
-    $('#titulo_modal').html('Editar Profesor');
-    $('#modalcrearProfesor').modal('show');
+    $('#titulo_modal').html('Editar Asignatua');
+    $('#modalcrearAsignatura').modal('show');
 }
 
-function eliminar(prof_id){
+function eliminar(asig_id){
     Swal.fire({
         title: 'Eliminar!',
         text: 'Desea eleminar el Registro?',
@@ -125,8 +118,8 @@ function eliminar(prof_id){
         cancelButtonText: 'Cancelar',
     }).then((result)=>{
         if(result.value){
-            $.post("/ISUM/controller/profesor.php?opc=eliminar",{prof_id:prof_id},function (data){
-                $('#profesor_data').DataTable().ajax.reload();
+            $.post("/ISUM/controller/asignatura.php?opc=eliminar",{asig_id:asig_id},function (data){
+                $('#asignatura_data').DataTable().ajax.reload();
                 Swal.fire({
                     title: 'Correcto!',
                     text: 'Se Elimino Correctamente',
@@ -139,19 +132,14 @@ function eliminar(prof_id){
 
 }
 
-function combo_rol(){
-    $.post("/ISUM/controller/rol.php?opc=combo", function (data) {
-        $('#rol_id').html(data);
-    });
-}
-function combo_escalfon(){
-    $.post("/ISUM/controller/escalafon.php?opc=combo", function (data) {
-        $('#esc_id').html(data);
+function combo_semestres(){
+    $.post("/ISUM/controller/semestre.php?opc=combo", function (data) {
+        $('#seme_id').html(data);
     });
 }
 
 $(document).on("click", "#btnplantilla", function () {
-    $('#modalProfesor').modal('show');
+    $('#modalAsignatura').modal('show');
 });
 
 var ExcelToJSON = function() {
@@ -168,23 +156,20 @@ var ExcelToJSON = function() {
                 // Here is your object
                 var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
                 var json_object = JSON.stringify(XL_row_object);
-                ProfesorList = JSON.parse(json_object);
+                AsignaturaList = JSON.parse(json_object);
 
-                console.log(ProfesorList)
-                for (i = 0; i < ProfesorList.length; i++) {
+                console.log(AsignaturaList)
+                for (i = 0; i < AsignaturaList.length; i++) {
 
-                    var columns = Object.values(ProfesorList[i])
+                    var columns = Object.values(AsignaturaList[i])
 
-                    $.post("/ISUM/controller/profesor.php?opc=guardar_desde_excel",{
-                        prof_nom : columns[0],
-                        prof_apep : columns[1],
-                        prof_apem : columns[2],
-                        prof_correo : columns[3],
-                        prof_nivel : columns[4],
-                        prof_sex : columns[5],
-                        prof_telf :columns[6],
-                        rol_id :columns[7],
-                        esc_id :columns[8]
+                    $.post("/ISUM/controller/asignatura.php?opc=guardar_desde_excel",{
+                        asig_nom : columns[0],
+                        asig_alfa : columns[1],
+                        asig_nrc : columns[2],
+                        asig_cred : columns[3],
+                        asig_horas : columns[4],
+                        seme_id : columns[5]
                     }, function (data) {
                         console.log(data);
                     });
@@ -194,8 +179,8 @@ var ExcelToJSON = function() {
                 document.getElementById("upload").value=null;
 
                 /* TODO: Actualizar Datatable JS */
-                $('#profesor_data').DataTable().ajax.reload();
-                $('#modalProfesor').modal('hide');
+                $('#asignatura_data').DataTable().ajax.reload();
+                $('#modalAsignatura').modal('hide');
             })
         };
         reader.onerror = function(ex) {
@@ -213,5 +198,8 @@ function handleFileSelect(evt) {
 }
 
 document.getElementById('upload').addEventListener('change', handleFileSelect, false);
+
+
+
 
 init();

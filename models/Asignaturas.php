@@ -1,74 +1,106 @@
 <?php
-    class asignatura extends Conectar{
-        
-        public function insert_asignatura($cal_alfa,$cal_nrc,$cal_asig,$cal_cred,$cal_hor,$cal_sem,){
+    class Asignatura extends Conectar{
+        public function insert_asignatura($asig_nom,$asig_alfa,$asig_nrc,$asig_cred,$asig_horas,$seme_id){
 
             $conectar = parent::Conexion();
             parent::set_names();
-            $sql="INSERT INTO calificaciones (cal_id,cal_alfa, cal_nrc, cal_asig, cal_cred, cal_hor, cal_sem, cal_est) VALUES (NULL,?,?,?,?,?,?,'1');";
+            $sql="INSERT INTO asignaturas (asig_id, asig_nom, asig_alfa, asig_nrc, asig_cred, asig_horas, seme_id, est) 
+                                VALUES (NULL,?,?,?,?,?,?,'1');";
+
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $cal_alfa);
-            $sql->bindValue(2, $cal_nrc);
-            $sql->bindValue(3, $cal_asig);
-            $sql->bindValue(4, $cal_cred);
-            $sql->bindValue(5, $cal_hor);
-            $sql->bindValue(6, $cal_sem);
+            $sql->bindValue(1, $asig_nom);
+            $sql->bindValue(2, $asig_alfa);
+            $sql->bindValue(3, $asig_nrc);
+            $sql->bindValue(4, $asig_cred);
+            $sql->bindValue(5, $asig_horas);
+            $sql->bindValue(6, $seme_id);
             $sql->execute();
+
             return $resultado = $sql->fetchAll();
         }
 
-        public function update_asignatura($cal_id, $cal_alfa, $cal_nrc, $cal_asig, $cal_cred, $cal_hor, $cal_sem){
-            $conectar=parent::Conexion();
+        public function update_asignatura($asig_id,$asig_nom,$asig_alfa,$asig_nrc,$asig_cred,$asig_horas,$seme_id){
+
+            $conectar= parent::conexion();
             parent::set_names();
-            $sql="UPDATE calificaciones
+            $sql="UPDATE asignaturas
                 SET
-                    cal_alfa = ?,
-                    cal_nrc = ?,
-                    cal_asig = ?,
-                    cal_cred = ?,
-                    cal_hor = ?,
-                    cal_sem = ?
+                    asig_nom = ?,
+                    asig_alfa = ?,
+                    asig_nrc = ?,
+                    asig_cred = ?,
+                    asig_horas = ?,
+                    seme_id = ?
                 WHERE
-                    cal_id = ?";
+                    asig_id = ?";
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $cal_alfa);
-            $sql->bindValue(2, $cal_nrc);
-            $sql->bindValue(3, $cal_asig);
-            $sql->bindValue(4, $cal_cred);
-            $sql->bindValue(5, $cal_hor);
-            $sql->bindValue(6, $cal_sem);
-            $sql->bindValue(7, $cal_id);
+            $sql->bindValue(1, $asig_nom);
+            $sql->bindValue(2, $asig_alfa);
+            $sql->bindValue(3, $asig_nrc);
+            $sql->bindValue(4, $asig_cred);
+            $sql->bindValue(5, $asig_horas);
+            $sql->bindValue(6, $seme_id);
+            $sql->bindValue(7, $asig_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
 
-        public function delete_asignatura($cal_id){
+        public function delete_asignatura($asig_id){
             $conectar = parent::Conexion();
             parent::set_names();
-            $sql = "UPDATE calificaciones SET cal_est=0 WHERE cal_id = ?";
+            $sql = "UPDATE asignaturas SET est=0 WHERE asig_id = ?";
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1,$cal_id);
+            $sql->bindValue(1,$asig_id);
             $sql->execute();
             return $resultado = $sql->fetchAll();
         }
 
-        public function asignatura(){
+        public function asignaturas(){
             $conectar = parent::Conexion();
             parent::set_names();
-            $sql = "SELECT * FROM calificaciones WHERE cal_est = 1";
-            $sql=$conectar->prepare($sql);  
+            $sql = "SELECT * FROM asignaturas WHERE est = 1";
+            $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado = $sql->fetchAll();
         }
 
-        public function asignatura_id($cal_id){
+        public function asignaturas2(){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="SELECT
+                asignaturas.asig_id,
+                asignaturas.asig_nom,
+                asignaturas.asig_alfa,
+                asignaturas.asig_nrc,
+                asignaturas.asig_cred,
+                asignaturas.asig_horas,
+                semestres.seme_id,
+                semestres.seme_nombre
+                FROM asignaturas
+                INNER JOIN semestres on asignaturas.seme_id = semestres.seme_id
+                WHERE asignaturas.est = 1";
+            $sql=$conectar->prepare($sql);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+
+        public function asignaturas_id($asig_id){
             $conectar = parent::Conexion();
             parent::set_names();
-            $sql = "SELECT * FROM calificaciones WHERE cal_est = 1 AND cal_id=? ";
+            $sql = "SELECT * FROM asignaturas WHERE est = 1 AND asig_id=?";
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1,$cal_id);
+            $sql->bindValue(1,$asig_id);
             $sql->execute();
             return $resultado = $sql->fetchAll();
+        }
+
+        public function total_asignaturas(){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="SELECT count(*) as total FROM asignaturas WHERE est=1";
+            $sql=$conectar->prepare($sql);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
         }
     }
 ?>

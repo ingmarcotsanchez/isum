@@ -10,7 +10,7 @@ if(isset($_SESSION["usu_id"])){
   <?php
     include("modulos/head.php");
   ?>
-  <title>ISUM | Profesores</title>
+  <title>ISUM | Semestres</title>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -38,21 +38,14 @@ if(isset($_SESSION["usu_id"])){
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Admón Profesores</h3>
+                            <h3 class="card-title">Admón Semestres</h3>
                         </div>
                         <div class="card-body">
-                            <button type="button" class="btn btn-outline-primary mb-2" onclick="nuevo()">Crear Profesor</button>
-                            <button type="button" class="btn btn-outline-secondary mb-2" id="btnplantilla">Cargar Planilla</button>
-                            <table id="profesor_data" class="table display responsive nowrap">
+                            <button type="button" class="btn btn-outline-primary mb-2" onclick="nuevo()">Crear Semestre</button>
+                            <table id="semestre_data" class="table display responsive nowrap">
                                 <thead>
                                     <tr>
-                                        <th>Profesor</th>
-                                        <th>Correo</th>
-                                        <th>Nivel Estudio</th>
-                                        <th>Sexo</th>
-                                        <th>Teléfono</th>
-                                        <th>Rol</th>
-                                        <th>Escalafón</th>
+                                        <th>Semestres</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -72,12 +65,9 @@ if(isset($_SESSION["usu_id"])){
         ?>
     </div>
     <!-- /.Site warapper -->
-    <?php require_once("admProfesorModal.php"); ?>
-    <?php require_once("admProfesorPlantilla.php"); ?>
+    <?php require_once("admSemestreModal.php"); ?>
     <?php include("modulos/js.php"); ?>
-    <script type="text/javascript" src="js/admProfesor.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+    <script type="text/javascript" src="js/admSemestre.js"></script>
 </body>
 </html>
 <?php

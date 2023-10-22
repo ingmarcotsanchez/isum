@@ -10,46 +10,51 @@
             <form method="post" id="asignatura_form">
                 <div class="modal-body">
                     
-                    <input type="hidden" name="cal_id" id="cal_id">
+                    <input type="text" name="asig_id" id="asig_id">
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="cal_alfa">Alfanumerico</label>
-                                <input type="text" class="form-control" name="cal_alfa" id="cal_alfa" placeholder="Ingrese el Alfanumerico">
+                                <label for="asig_nom">Asignatura</label>
+                                <input type="text" class="form-control" name="asig_nom" id="asig_nom" placeholder="Ingrese el Peso">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="cal_nrc">NRC</label>
-                                <input type="text" class="form-control" name="cal_nrc" id="cal_nrc" placeholder="Ingrese el NRC">
+                                <label for="asig_alfa">Alfanumerico</label>
+                                <input type="text" class="form-control" name="asig_alfa" id="asig_alfa" placeholder="Ingrese el Alfanumerico">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="asig_nrc">NRC</label>
+                                <input type="text" class="form-control" name="asig_nrc" id="asig_nrc" placeholder="Ingrese el NRC">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="asig_cred">Créditos</label>
+                                <input type="text" class="form-control" name="asig_cred" id="asig_cred" placeholder="Ingrese el Número de Crédito">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="cal_asig">Asignatura</label>
-                                <input type="text" class="form-control" name="cal_asig" id="cal_asig" placeholder="Ingrese el Peso">
+                                <label for="asig_horas">Horas</label>
+                                <input type="text" class="form-control" name="asig_horas" id="asig_horas" placeholder="Ingrese la cantidad de Horas">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="cal_cred">Creditos</label>
-                                <input type="text" class="form-control" name="cal_cred" id="cal_cred" placeholder="Ingrese el numero de credito">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="cal_hor">Horas</label>
-                                <input type="text" class="form-control" name="cal_hor" id="cal_hor" placeholder="Ingrese las Horas">
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="cal_sem">Semestre</label>
-                                <input type="text" class="form-control" name="cal_sem" id="cal_sem" placeholder="Ingrese el semestre">
+                                <label for="seme_id">Semestre</label>
+                                <select class="form-control select2" style="width:100%" name="seme_id" id="seme_id" data-placeholder="Seleccione">
+                                
+                                    <option label="Seleccione"></option>
+
+                                </select>
                             </div>
                         </div>
                     </div>  

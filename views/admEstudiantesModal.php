@@ -42,14 +42,6 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="est_sem">semestre</label>
-                                <input type="text" class="form-control" name="est_sem" id="est_sem" placeholder="Ingrese el semestre">
-                            </div>
-                        </div>
-                    </div>  
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
                                 <label for="est_sex">Sexo</label>
                                 <select class="form-control select2" name="est_sex" id="est_sex" data-placeholder="Seleccione">
                                     <option label="Seleccione"></option>
@@ -58,10 +50,18 @@
                                 </select>
                             </div>
                         </div>
+                    </div>  
+                    <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="est_tel">Teléfono</label>
-                                <input type="text" class="form-control" name="est_tel" id="est_tel" placeholder="Ingrese su Telefono">
+                                <label for="est_telf">Teléfono</label>
+                                <input type="text" class="form-control" name="est_telf" id="est_telf" placeholder="Ingrese su Teléfono">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="est_seme">Semestre de Ingreso</label>
+                                <input type="text" class="form-control" name="est_seme" id="est_seme" placeholder="Ingrese su Semestre de ingreso">
                             </div>
                         </div>
                     </div>  
