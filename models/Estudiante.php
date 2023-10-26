@@ -1,49 +1,64 @@
 <?php
     class Estudiante extends Conectar{
-        public function insert_estudiante($est_nom,$est_apep,$est_apem,$est_correo,$est_sex,$est_telf,$est_seme){
+        public function insert_estudiante($est_dni, $est_tipo, $est_cedula,$est_nom,$est_apep,$est_apem,$est_fecnac,$est_correo,$est_sex,$est_telf,$est_seme,$est_egre){
 
             $conectar = parent::Conexion();
             parent::set_names();
-            $sql="INSERT INTO estudiante (est_id, est_nom, est_apep, est_apem, est_correo, est_sex, est_telf, est_seme, est) 
-                                VALUES (NULL,?,?,?,?,?,?,?,1);";
+            $sql="INSERT INTO estudiante (est_id, est_dni, est_tipo, est_cedula, est_nom, est_apep, est_apem, est_fecnac, est_correo, est_sex, est_telf, est_seme, est_egre, est) 
+                                VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?,?,1);";
 
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $est_nom);
-            $sql->bindValue(2, $est_apep);
-            $sql->bindValue(3, $est_apem);
-            $sql->bindValue(4, $est_correo);
-            $sql->bindValue(5, $est_sex);
-            $sql->bindValue(6, $est_telf);
-            $sql->bindValue(7, $est_seme);
+            $sql->bindValue(1, $est_dni);
+            $sql->bindValue(2, $est_tipo);
+            $sql->bindValue(3, $est_cedula);
+            $sql->bindValue(4, $est_nom);
+            $sql->bindValue(5, $est_apep);
+            $sql->bindValue(6, $est_apem);
+            $sql->bindValue(7, $est_fecnac);
+            $sql->bindValue(8, $est_correo);
+            $sql->bindValue(9, $est_sex);
+            $sql->bindValue(10, $est_telf);
+            $sql->bindValue(11, $est_seme);
+            $sql->bindValue(12, $est_egre);
             $sql->execute();
 
             return $resultado = $sql->fetchAll();
         }
 
-        public function update_estudiante($est_id,$est_nom,$est_apep,$est_apem,$est_correo,$est_sex,$est_telf,$est_seme){
+        public function update_estudiante($est_id,$est_dni, $est_tipo, $est_cedula,$est_nom,$est_apep,$est_apem,$est_fecnac,$est_correo,$est_sex,$est_telf,$est_seme,$est_egre){
 
             $conectar= parent::conexion();
             parent::set_names();
             $sql="UPDATE estudiante
                 SET
+                    est_dni = ?,
+                    est_tipo = ?,
+                    est_cedula = ?,
                     est_nom = ?,
                     est_apep = ?,
                     est_apem = ?,
+                    est_fecnac = ?,
                     est_correo = ?,
                     est_sex = ?,
                     est_telf = ?,
-                    est_seme = ?
+                    est_seme = ?,
+                    est_egre = ? 
                 WHERE
                     est_id = ?";
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $est_nom);
-            $sql->bindValue(2, $est_apep);
-            $sql->bindValue(3, $est_apem);
-            $sql->bindValue(4, $est_correo);
-            $sql->bindValue(5, $est_sex);
-            $sql->bindValue(6, $est_telf);
-            $sql->bindValue(7, $est_seme);
-            $sql->bindValue(8, $est_id);
+            $sql->bindValue(1, $est_dni);
+            $sql->bindValue(2, $est_tipo);
+            $sql->bindValue(3, $est_cedula);
+            $sql->bindValue(4, $est_nom);
+            $sql->bindValue(5, $est_apep);
+            $sql->bindValue(6, $est_apem);
+            $sql->bindValue(7, $est_fecnac);
+            $sql->bindValue(8, $est_correo);
+            $sql->bindValue(9, $est_sex);
+            $sql->bindValue(10, $est_telf);
+            $sql->bindValue(11, $est_seme);
+            $sql->bindValue(12, $est_egre);
+            $sql->bindValue(13, $est_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
@@ -80,16 +95,43 @@
         public function total_estudiantes_activos(){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="SELECT count(*) as total FROM estudiante WHERE est=1";
+            $sql="SELECT count(*) as total FROM estudiante WHERE est_egre=1";
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
 
-        public function total_estudiantes_inactivos(){
+        public function total_estudiantes_ausentes(){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="SELECT count(*) as total FROM estudiante WHERE est=0";
+            $sql="SELECT count(*) as total FROM estudiante WHERE est_egre=2";
+            $sql=$conectar->prepare($sql);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+
+        public function total_estudiantes_egresados(){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="SELECT count(*) as total FROM estudiante WHERE est_egre=3";
+            $sql=$conectar->prepare($sql);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+
+        public function total_estudiantes_nograduado(){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="SELECT count(*) as total FROM estudiante WHERE est_egre=4";
+            $sql=$conectar->prepare($sql);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+
+        public function total_estudiantes_desertores(){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="SELECT count(*) as total FROM estudiante WHERE est_egre=5";
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado=$sql->fetchAll();

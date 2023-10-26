@@ -4,26 +4,34 @@
         $calificacion = new calificacion();
 
         switch($_GET["opc"]){
+            case "guardaryeditar":
+                if(empty($_POST["est_id"])){
+                    $calificacion->insert_calificacion($_POST["asig_id"],$_POST["est_id"],$_POST["asigxest_califica"],$_POST["est"]);
+                }/*else{
+                    $calificacion->update_calificacion($_POST["asig_id"],$_POST["est_id"],$_POST["asigxest_califica"],$_POST["est"]);
+                }*/
+                break;
             
             case "listar":
-                $datos=$calificacion->calificacion();
+                $datos=$calificacion->calificaciones();
                 $data=Array();
                 foreach($datos as $row){
                     $sub_array = array();
                     //columnas de las tablas a mostrar segun select del modelo
-                    $sub_array[] = $row["est_id"];
-                    $sub_array[] = $row["est_nom"];
-                    $sub_array[] = $row["cal_asig"];
-                    $sub_array[] = $row["cal_cred"];
-                    $sub_array[] = $row["cal_hor"];
-                    $sub_array[] = $row["cal_sem"];
-                    $sub_array[] = $row["calxest_fecha"];
+                    $sub_array[] = $row["est_nom"] ." ". $row["est_apep"] ." ". $row["est_apem"];
+                    $sub_array[] = $row["asig_nom"] ." - ". $row["asig_alfa"] ." - ". $row["asig_nrc"];
+                    $sub_array[] = $row["asigxest_califica"];
+                    if($row["est"] == 1){
+                        $sub_array[] = "Aprobada";
+                    }else{
+                        $sub_array[] = "Reprobada";
+                    }
                     $sub_array[] = '<button type="button" onClick="editar('.$row["calxest_id"].');"  id="'.$row["calxest_id"].'" class="btn btn-outline-success btn-icon"><i class="bx bx-edit-alt"></i></button>';
                     $sub_array[] = '<button type="button" onClick="eliminar('.$row["calxest_id"].');"  id="'.$row["calxest_id"].'" class="btn btn-outline-danger btn-icon"><i class="bx bx-trash"></i></button>';
                     
                     $data[] = $sub_array;
                 }
-                /*Formato del datatable, se usa siempre*/
+          
                 $results = array(
                     "sEcho"=>1,
                     "iTotalRecords"=>count($data),
@@ -31,7 +39,7 @@
                     "aaData"=>$data);
                 echo json_encode($results);
                 break;
-
+/*
             case "obtener_estudiantes":
                 $datos = $calificacion->obtenerEstudiantes();
                 echo json_encode($datos);
@@ -56,6 +64,7 @@
                     echo json_encode($response);
                 }
                 break;
+                */
         }
         
 ?> 

@@ -1,15 +1,48 @@
 var usu_id = $('#usu_idx').val();
 
 function init(){
-    $("#estudiante_form").on("submit",function(e){
+    $("#autoevaluacion_form").on("submit",function(e){
         guardaryeditar(e);
     });
 
 }
 
+function guardaryeditar(e){
+    //console.log("prueba");
+    e.preventDefault();
+    var formData = new FormData($("#autoevaluacion_form")[0]);
+    //console.log(formData);
+    $.ajax({
+        url: "/ISUM/controller/autoevaluacion.php?opc=guardaryeditar",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        
+        success: function(data){
+            console.log(data);
+            $('#autoevaluacion_data').DataTable().ajax.reload();
+            $('#modalcrearAutoevaluacion').modal('hide');
+
+            Swal.fire({
+                title: 'Correcto!',
+                text: 'Se Registro Correctamente',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            })
+        }
+    });
+}
+
 $(document).ready(function(){
 
-    $('#estudiante_data').DataTable({
+    $('#fac_id').select2({
+        dropdownParent: $('#modalcrearAutoevaluacion')
+    });
+
+    combo_factor();
+
+    $('#autoevaluacion_data').DataTable({
         "aProcessing": true,
         "aServerSide": true,
         dom: 'Bfrtip',
@@ -18,7 +51,7 @@ $(document).ready(function(){
             'csvHtml5',
         ],
         "ajax":{
-            url:"/ISUM/controller/estudiante.php?opc=listar",
+            url:"/ISUM/controller/autoevaluacion.php?opc=listar",
             type:"post"
         },
         "bDestroy": true,
@@ -55,34 +88,27 @@ $(document).ready(function(){
 });
 
 function nuevo(){
-    $('#titulo_modal').html('Nuevo Estudiante');
-    $('#estudiante_form')[0].reset();
-    $('#modalcrearEstudiante').modal('show');
+    $('#titulo_modal').html('Nueva Autoevaluación');
+    $('#autoevaluacion_form')[0].reset();
+    $('#modalcrearAutoevaluacion').modal('show');
 }
 
-function editar(est_id){
-    $.post("/ISUM/controller/estudiante.php?opc=mostrar",{est_id:est_id},function (data){
+function editar(aut_id){
+    $.post("/ISUM/controller/autoevaluacion.php?opc=mostrar",{aut_id:aut_id},function (data){
         data = JSON.parse(data);
         //console.log(data);
-        $('#est_id').val(data.est_id);
-        $('#est_dni').val(data.est_dni);
-        $('#est_tipo').val(data.est_tipo);
-        $('#est_cedula').val(data.est_cedula);
-        $('#est_nom').val(data.est_nom);
-        $('#est_apep').val(data.est_apep);
-        $('#est_apem').val(data.est_apem);
-        $('#est_fecnac').val(data.est_fecnac);
-        $('#est_correo').val(data.est_correo);
-        $('#est_sex').val(data.est_sex);
-        $('#est_telf').val(data.est_telf);
-        $('#est_seme').val(data.est_seme);
-        $('#est_egre').val(data.est_egre);
+        $('#aut_id').val(data.aut_id);
+        $('#aut_factor').val(data.aut_factor);
+        $('#aut_ponderacion').val(data.aut_ponderacion);
+        $('#aut_califica').val(data.aut_califica);
+        $('#aut_cumple').val(data.aut_cumple);
+        $('#aut_anno').val(data.aut_anno);
     });
-    $('#titulo_modal').html('Editar Estudiante');
-    $('#modalcrearEstudiante').modal('show');
+    $('#titulo_modal').html('Editar Autoevaluación');
+    $('#modalcrearAutoevaluación').modal('show');
 }
 
-function eliminar(est_id){
+function eliminar(aut_id){
     Swal.fire({
         title: 'Eliminar!',
         text: 'Desea eleminar el Registro?',
@@ -92,8 +118,8 @@ function eliminar(est_id){
         cancelButtonText: 'Cancelar',
     }).then((result)=>{
         if(result.value){
-            $.post("/ISUM/controller/estudiante.php?opc=eliminar",{est_id:est_id},function (data){
-                $('#estudiante_data').DataTable().ajax.reload();
+            $.post("/ISUM/controller/autoevaluacion.php?opc=eliminar",{aut_id:aut_id},function (data){
+                $('#autoevaluacion_data').DataTable().ajax.reload();
                 Swal.fire({
                     title: 'Correcto!',
                     text: 'Se Elimino Correctamente',
@@ -106,8 +132,14 @@ function eliminar(est_id){
 
 }
 
+function combo_factor(){
+    $.post("/ISUM/controller/factor.php?opc=combo", function (data) {
+        $('#fac_id').html(data);
+    });
+}
+
 $(document).on("click", "#btnplantilla", function () {
-    $('#modalEstudiante').modal('show');
+    $('#modalAutoevaluacion').modal('show');
 });
 
 var ExcelToJSON = function() {
@@ -124,26 +156,19 @@ var ExcelToJSON = function() {
                 // Here is your object
                 var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
                 var json_object = JSON.stringify(XL_row_object);
-                EstudianteList = JSON.parse(json_object);
+                AutoevaluacionList = JSON.parse(json_object);
 
-                console.log(EstudianteList)
-                for (i = 0; i < EstudianteList.length; i++) {
+                console.log(AutoevaluacionList)
+                for (i = 0; i < AutoevaluacionList.length; i++) {
 
-                    var columns = Object.values(EstudianteList[i])
+                    var columns = Object.values(AutoevaluacionList[i])
 
-                    $.post("/ISUM/controller/estudiante.php?opc=guardar_desde_excel",{
-                        est_dni : columns[0],
-                        est_tipo : columns[1],
-                        est_cedula : columns[2],
-                        est_nom : columns[3],
-                        est_apep : columns[4],
-                        est_apem : columns[5],
-                        est_fecnac : columns[6],
-                        est_correo : columns[7],
-                        est_sex : columns[8],
-                        est_telf :columns[9],
-                        est_seme : columns[10],
-                        est_egre : columns[11]
+                    $.post("/ISUM/controller/autoevaluacion.php?opc=guardar_desde_excel",{
+                        aut_factor : columns[0],
+                        prof_ponderacion : columns[1],
+                        prof_califica : columns[2],
+                        prof_cumple : columns[3],
+                        prof_anno : columns[4]
                     }, function (data) {
                         console.log(data);
                     });
@@ -153,8 +178,8 @@ var ExcelToJSON = function() {
                 document.getElementById("upload").value=null;
 
                 /* TODO: Actualizar Datatable JS */
-                $('#estudiante_data').DataTable().ajax.reload();
-                $('#modalEstudiante').modal('hide');
+                $('#autoevaluacion_data').DataTable().ajax.reload();
+                $('#modalAutoevaluacion').modal('hide');
             })
         };
         reader.onerror = function(ex) {
@@ -172,6 +197,5 @@ function handleFileSelect(evt) {
 }
 
 document.getElementById('upload').addEventListener('change', handleFileSelect, false);
-
 
 init();

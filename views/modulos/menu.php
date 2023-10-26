@@ -41,7 +41,7 @@
           <li class="nav-header">BÁSICAS</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-tachometer-alt text-success"></i>
               <p>
                 Docencia
                 <i class="right fas fa-angle-left"></i>
@@ -50,19 +50,19 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="<?php echo BASE_URL; ?>admProfesor.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle text-success nav-icon"></i>
                   <p>Profesores</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?php echo BASE_URL; ?>admEscalafon.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle text-success nav-icon"></i>
                   <p>Escalafón</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?php echo BASE_URL; ?>admRol.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle text-success nav-icon"></i>
                   <p>Roles</p>
                 </a>
               </li>
@@ -70,7 +70,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-tachometer-alt text-warning"></i>
               <p>
                 Investigación
                 <i class="right fas fa-angle-left"></i>
@@ -79,19 +79,19 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                   <a href="<?php echo BASE_URL; ?>admSemilleros.php" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="far fa-circle text-warning nav-icon"></i>
                     <p>Semilleros</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="<?php echo BASE_URL; ?>admProyectos.php" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="far fa-circle text-warning nav-icon"></i>
                     <p>Proyectos</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="<?php echo BASE_URL; ?>admProductos.php" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="far fa-circle text-warning nav-icon"></i>
                     <p>Productos</p>
                   </a>
                 </li>
@@ -99,7 +99,7 @@
             </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-tachometer-alt text-primary"></i>
               <p>
                 Educación
                 <i class="right fas fa-angle-left"></i>
@@ -108,29 +108,42 @@
             <ul class="nav nav-treeview">
             <li class="nav-item">
                 <a href="<?php echo BASE_URL; ?>admSemestre.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle text-primary nav-icon"></i>
                   <p>Semestres</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?php echo BASE_URL; ?>admAsignaturas.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle text-primary nav-icon"></i>
                   <p>Asignaturas</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?php echo BASE_URL; ?>admEstudiantes.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle text-primary nav-icon"></i>
                   <p>Estudiantes</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?php echo BASE_URL; ?>admCalificaciones.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle text-primary nav-icon"></i>
                   <p>Calificaciones</p>
                 </a>
               </li>
             </ul>
+          </li>
+          <li class="nav-header">AUTOEVALUACIÓN</li>
+          <li class="nav-item">
+            <a href="<?php echo BASE_URL; ?>admFactor.php" class="nav-link">
+              <i class="nav-icon far fa-circle text-info"></i>
+              <p class="text">Factores</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo BASE_URL; ?>admAutoevaluacion.php" class="nav-link">
+              <i class="nav-icon far fa-circle text-info"></i>
+              <p class="text">Autoevaluación</p>
+            </a>
           </li>
           <li class="nav-header">LOGOUT</li>
           <li class="nav-item">

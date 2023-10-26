@@ -10,7 +10,7 @@ if(isset($_SESSION["usu_id"])){
   <?php
     include("modulos/head.php");
   ?>
-  <title>ISUM | Estudiantes X Calificaciones</title>
+  <title>ISUM | Calificaciones X Estudiante </title>
 </head>
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->
@@ -41,26 +41,39 @@ if(isset($_SESSION["usu_id"])){
                             <h3 class="card-title">Admón Calificaciones</h3>
                         </div>
                         <div class="card-body">
-                            <div class="w-25 mb-2">
-                                <select id="filtroCalificaciones" class="form-control mb-4"> <!-- form-control-sm para hacerla más pequeña -->
-                                    <option value="">Filtrar por calificación</option>
-                                </select>
-                            </div>
-                            <div class="input-group-append mb-4">
-                                <div class="progress" style="height: 1.5rem; width: 100px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Estudiantes: <span class="tx-danger">*</span></label>
+                                        <select class="form-control select2" style="width:100%" name="est_id" id="est_id" data-placeholder="Seleccione">
+                                            <option label="Seleccione"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="form-control-label">&nbsp;</label>
+                                    <button class="btn btn-outline-primary form-control" onclick="nuevo()"><i class="fa fa-plus-square mg-r-10"></i> Agregar Asignaturas</button>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Estado: <span class="tx-danger">*</span></label>
+                                        <div class="progress-group">
+                                            <span class="progress-text">Porcentaje de la carrera</span>
+                                            <span class="float-right"><b>480</b>/800</span>
+                                            <div class="progress progress-sm">
+                                                <div class="progress-bar bg-success" style="width: 60%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <table id="calificaciones_data" class="table display responsive nowrap">
                                 <thead>
                                     <tr>
-                                        <th>ID Estudiante</th>
-                                        <th>Nombre Estudiante</th>
+                                        <th>Estudiante</th>
                                         <th>Asignatura</th>
-                                        <th>Creditos</th>
-                                        <th>Horas</th>
-                                        <th>Semestre</th>
-                                        <th>Fecha</th>
+                                        <th>Calificación</th>
+                                        <th>Estado</th>
                                         <th></th>
                                         <th></th>
                                     </tr>

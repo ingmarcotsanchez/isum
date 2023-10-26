@@ -1,27 +1,47 @@
 <?php
     class calificacion extends Conectar{
-        
-        public function calificacion(){
+
+        public function insert_calificacion($asig_id, $est_id, $asigxest_nota, $asigxest_est){
+
             $conectar = parent::Conexion();
             parent::set_names();
-            $sql = "SELECT ce.calxest_id,ce.calxest_fecha, e.est_nom,e.est_id,c.cal_asig,c.cal_cred,c.cal_hor,c.cal_sem
-            FROM calificacionxestudiante AS ce
-            LEFT JOIN estudiantes AS e ON ce.est_id = e.est_id
-            LEFT JOIN calificaciones AS c ON ce.cal_id = c.cal_id
-            WHERE ce.estado = 1";
-            $sql=$conectar->prepare($sql);  
+            $sql="INSERT INTO asignaturaXestudiante (asigxest_id, asig_id, est_id, asigxest_nota, asigxest_est, est) 
+                                VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?,?,1);";
+
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $asig_id);
+            $sql->bindValue(2, $est_id);
+            $sql->bindValue(3, $asigxest_nota);
+            $sql->bindValue(4, $asigxest_est);
             $sql->execute();
+
             return $resultado = $sql->fetchAll();
         }
 
-        public function obtenerEstudiantes(){
-            $conectar = parent::Conexion();
+        public function calificaciones(){
+            $conectar= parent::conexion();
             parent::set_names();
-            $sql = "SELECT est_id, CONCAT(est_nom, ' ', est_apep , ' ', est_apem) AS est_nombre FROM estudiantes";
-            $sql = $conectar->prepare($sql);  
+            $sql="SELECT
+                asignaturaXestudiante.est_id,
+                asignaturaXestudiante.asig_id,
+                estudiante.est_id,
+                estudiante.est_nom,
+                estudiante.est_apep,
+                estudiante.est_apem,
+                asignaturas.asig_id,
+                asignaturas.asig_nom,
+                asignaturas.asig_alfa,
+                asignaturas.asig_nrc
+                FROM asignaturaXestudiante
+                INNER JOIN estudiante on asignaturaXestudiante.est_id = estudiante.est_id
+                INNER JOIN asignaturas on asignaturaXestudiante.asig_id = asignaturas.asig_id
+                WHERE asignaturaXestudiante.est = 1";
+            $sql=$conectar->prepare($sql);
             $sql->execute();
-            return $resultado = $sql->fetchAll();
+            return $resultado=$sql->fetchAll();
         }
+
+        /*
 
         public function obtener_creditos($estudianteId){
             $conectar = parent::Conexion();
@@ -43,7 +63,7 @@
             } else {
                 return 0; // Si no se encontraron resultados, retorna 0 créditos.
             }
-        }
+        }*/
         
     }
 ?>

@@ -12,10 +12,43 @@
                     
                     <input type="hidden" name="est_id" id="est_id">
                     <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="est_dni">ID</label>
+                                <input type="text" class="form-control" name="est_dni" id="est_dni" placeholder="Ingrese su ID">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="est_fecnac">Fecha de Nacimiento</label>
+                                <input type="date" class="form-control" name="est_fecnac" id="est_fecnac" placeholder="Ingrese su ID">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="est_tipo">Tipo Identificación</label>
+                                <select class="form-control select2" name="est_tipo" id="est_tipo" data-placeholder="Seleccione">
+                                    <option label="Seleccione"></option>
+                                    <option value="TI">Tarjeta de Identidad</option>
+                                    <option value="CC">Cédula de Ciudadania</option>
+                                    <option value="CE">Cédula de Extranjeria</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="est_cedula">Número Identificación</label>
+                                <input type="text" class="form-control" name="est_cedula" id="est_cedula" placeholder="Ingrese su Número de identificación">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="est_nom">Nombre</label>
-                                <input type="text" class="form-control" name="est_nom" id="est_nom" placeholder="Ingrese su Nombre">
+                                <input type="text" class="form-control" name="est_nom" id="est_nom" placeholder="Ingrese sus Nombres">
                             </div>
                         </div>
                     </div>
@@ -23,13 +56,13 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="est_apep">Apellido Paterno</label>
-                                <input type="text" class="form-control" name="est_apep" id="est_apep" placeholder="Ingrese su Nombre">
+                                <input type="text" class="form-control" name="est_apep" id="est_apep" placeholder="Ingrese su Primer apellido">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="est_apem">Apellido Materno</label>
-                                <input type="text" class="form-control" name="est_apem" id="est_apem" placeholder="Ingrese su Apellido">
+                                <input type="text" class="form-control" name="est_apem" id="est_apem" placeholder="Ingrese su Segundo apellido">
                             </div>
                         </div>
                     </div>
@@ -37,7 +70,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="est_correo">Correo Electrónico</label>
-                                <input type="email" class="form-control" name="est_correo" id="est_correo" placeholder="Ingrese su Correo">
+                                <input type="email" class="form-control" name="est_correo" id="est_correo" placeholder="Ingrese su Correo Instituciónal">
                             </div>
                         </div>
                         <div class="col-6">
@@ -65,6 +98,21 @@
                             </div>
                         </div>
                     </div>  
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="est_egre">Estado</label>
+                                <select class="form-control select2" name="est_egre" id="est_egre" data-placeholder="Seleccione">
+                                    <option label="Seleccione"></option>
+                                    <option value=1>Activo</option>
+                                    <option value=2>Ausente</option>
+                                    <option value=3>Egresado</option>
+                                    <option value=4>Egresado No Graduado</option>
+                                    <option value=5>Desertor</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="reset" class="btn btn-default" data-dismiss="modal">Cancelar</button>
