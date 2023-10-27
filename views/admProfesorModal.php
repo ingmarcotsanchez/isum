@@ -18,13 +18,13 @@
                                 <input type="text" class="form-control" name="prof_nom" id="prof_nom" placeholder="Ingrese un Nombre">
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="prof_apep">Apellido Paterno</label>
                                 <input type="text" class="form-control" name="prof_apep" id="prof_apep" placeholder="Ingrese Primer Apellido ">
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="prof_apem">Apellido Materno</label>
                                 <input type="text" class="form-control" name="prof_apem" id="prof_apem" placeholder="Ingrese Segundo Apellido">
@@ -36,7 +36,7 @@
                                 <input type="email" class="form-control" name="prof_correo" id="prof_correo" placeholder="Ingrese un Correo">
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="prof_niv">Último Nivel de Estudio</label>
                                 <select class="form-control select2" style="width:100%" name="prof_niv" id="prof_niv" data-placeholder="Seleccione">
@@ -48,7 +48,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="prof_sex">Sexo</label>
                                 <select class="form-control select2" style="width:100%" name="prof_sex" id="prof_sex" data-placeholder="Seleccione">
@@ -58,13 +58,13 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="prof_telf">Teléfono</label>
                                 <input type="text" class="form-control" name="prof_telf" id="prof_telf" placeholder="Ingrese Segundo Apellido">
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="rol_id">Rol</label>
                                 <select class="form-control select2" style="width:100%" name="rol_id" id="rol_id" data-placeholder="Seleccione">
@@ -74,13 +74,23 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="esc_id">Escalafón</label>
                                 <select class="form-control select2" style="width:100%" name="esc_id" id="esc_id" data-placeholder="Seleccione">
                                 
                                     <option label="Seleccione"></option>
 
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="prof_est">Estado</label>
+                                <select class="form-control select2" style="width:100%" name="prof_est" id="prof_est" data-placeholder="Seleccione">
+                                    <option label="Seleccione"></option>
+                                    <option value=1>Activo</option>
+                                    <option value=0>Inactivo</option>
                                 </select>
                             </div>
                         </div>

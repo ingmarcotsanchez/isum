@@ -10,7 +10,7 @@
             <form method="post" id="asignatura_form">
                 <div class="modal-body">
                     
-                    <input type="text" name="asig_id" id="asig_id">
+                    <input type="hidden" name="asig_id" id="asig_id">
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">

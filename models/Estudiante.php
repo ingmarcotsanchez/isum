@@ -92,6 +92,24 @@
             return $resultado = $sql->fetchAll();
         }
 
+        
+
+        /*TODO: Insert Curso por Usuario */
+        public function insert_estudiante_asignatura($est_id,$asig_id){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="INSERT INTO asignaturaXestudiante (asigxest_id,est_id,asig_id,asigxest_nota, asigxest_est,est) VALUES (NULL,?,?,?,?,1);";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $est_id);
+            $sql->bindValue(2, $asig_id);
+            $sql->execute();
+//conocer el último id insertado
+            $sql1="select last_insert_id() as 'asigxest_id'";
+            $sql1=$conectar->prepare($sql1);
+            $sql1->execute();
+            return $resultado=$sql1->fetch(pdo::FETCH_ASSOC);
+        }
+
         public function total_estudiantes_activos(){
             $conectar= parent::conexion();
             parent::set_names();

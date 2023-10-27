@@ -110,6 +110,7 @@ function editar(prof_id){
         $('#prof_telf').val(data.prof_telf);
         $('#rol_id').val(data.rol_id).trigger('change');
         $('#esc_id').val(data.esc_id).trigger('change');
+        $('#prof_est').val(data.prof_est);
     });
     $('#titulo_modal').html('Editar Profesor');
     $('#modalcrearProfesor').modal('show');
@@ -184,7 +185,8 @@ var ExcelToJSON = function() {
                         prof_sex : columns[5],
                         prof_telf :columns[6],
                         rol_id :columns[7],
-                        esc_id :columns[8]
+                        esc_id :columns[8],
+                        prof_est : columns[9]
                     }, function (data) {
                         console.log(data);
                     });

@@ -10,12 +10,12 @@
             <form method="post" id="calificaciones_form">
                 <div class="modal-body">
                     
-                    <input type="hidden" name="est_id" id="est_id">
+                    <input type="hidden" name="asigxest_id" id="asigxest_id">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="asig_id">Asignatura</label>
-                                <select class="form-control select2" style="width:100%" name="asig_id" id="asig_id" data-placeholder="Seleccione">
+                                <select class="form-control select2" style="width:100%" name="asig_id" id="asig_id" data-placeholder="Seleccione" readonly>
                                     <option label="Seleccione"></option>
                                 </select>
                             </div>
@@ -24,14 +24,14 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="asigxest_califica">Calificación</label>
-                                <input type="text" class="form-control" name="asigxest_califica" id="asigxest_califica" placeholder="Ingrese una calificación">
+                                <label for="asigxest_nota">Calificación</label>
+                                <input type="text" class="form-control" name="asigxest_nota" id="asigxest_nota" placeholder="Ingrese una calificación">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="est">Estado</label>
-                                <input type="text" class="form-control" name="est" id="est" placeholder="Estado de la asignatura" readonly>
+                                <label for="asigxest_est">Estado</label>
+                                <input type="text" class="form-control" name="asigxest_est" id="asigxest_est" placeholder="Estado de la asignatura" readonly>
                             </div>
                         </div>
                     </div> 

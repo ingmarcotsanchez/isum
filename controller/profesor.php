@@ -6,9 +6,9 @@
     switch($_GET["opc"]){
         case "guardaryeditar":
                 if(empty($_POST["prof_id"])){
-                    $profesor->insert_profesor($_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"]);
+                    $profesor->insert_profesor($_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],$_POST["prof_est"]);
                 }else{
-                    $profesor->update_profesor($_POST["prof_id"], $_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"]);
+                    $profesor->update_profesor($_POST["prof_id"], $_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],$_POST["prof_est"]);
                 }
                 break;
         case "mostrar":
@@ -21,10 +21,11 @@
                         $output["prof_apem"] = $row["prof_apem"];
                         $output["prof_correo"] = $row["prof_correo"];
                         $output["prof_niv"] = $row["prof_niv"];
-                        $output["prof_sex"] = $row["prof_sex"];
+                        //$output["prof_sex"] = $row["prof_sex"];
                         $output["prof_telf"] = $row["prof_telf"];
                         $output["rol_id"] = $row["rol_id"];
                         $output["esc_id"] = $row["esc_id"];
+                        $output["prof_est"] = $row["prof_est"];
                     }
                     echo json_encode($output);
                 }
@@ -51,11 +52,11 @@
                     }else{
                         $sub_array[] = "Sin escalafón";
                     }
-                    if($row["prof_sex"] == 'M'){
+                    /*if($row["prof_sex"] == 'M'){
                         $sub_array[] = "Masculino";
                     }else{
                         $sub_array[] = "Femenino";
-                    }
+                    }*/
                     $sub_array[] = $row["prof_telf"];
                     if($row["rol_id"] == 1){
                         $sub_array[] = "Coordinador";
@@ -69,7 +70,11 @@
                         $sub_array[] = "Sin rol";
                     }
                     $sub_array[] = $row["esc_nombre"];
-                
+                    if($row["prof_est"] == 1){
+                        $sub_array[] = "<button class='btn btn-success btn-sm'>Activo</button>";
+                    }else{
+                        $sub_array[] = "<button class='btn btn-danger btn-sm'>Inactivo</button>";
+                    }
                     $sub_array[] = '<button type="button" onClick="editar('.$row["prof_id"].');"  id="'.$row["prof_id"].'" class="btn btn-outline-success btn-icon"><i class="bx bx-edit-alt"></i></button>';
                     $sub_array[] = '<button type="button" onClick="eliminar('.$row["prof_id"].');"  id="'.$row["prof_id"].'" class="btn btn-outline-danger btn-icon"><i class="bx bx-trash"></i></button>';
                     
@@ -94,7 +99,7 @@
             }
             break;
         case "guardar_desde_excel":
-            $profesor->insert_profesor($_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"]);
+            $profesor->insert_profesor($_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],$_POST["prof_est"]);
             break;
         
             

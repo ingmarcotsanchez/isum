@@ -47,19 +47,20 @@ if(isset($_SESSION["usu_id"])){
                                         <label class="form-control-label">Estudiantes: <span class="tx-danger">*</span></label>
                                         <select class="form-control select2" style="width:100%" name="est_id" id="est_id" data-placeholder="Seleccione">
                                             <option label="Seleccione"></option>
+
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <label class="form-control-label">&nbsp;</label>
-                                    <button class="btn btn-outline-primary form-control" onclick="nuevo()"><i class="fa fa-plus-square mg-r-10"></i> Agregar Asignaturas</button>
+                                    <button class="btn btn-outline-primary form-control" onclick="agregar()"><i class="fa fa-plus-square mg-r-10"></i> Agregar Asignaturas</button>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Estado: <span class="tx-danger">*</span></label>
                                         <div class="progress-group">
                                             <span class="progress-text">Porcentaje de la carrera</span>
-                                            <span class="float-right"><b>480</b>/800</span>
+                                            <span class="float-right"><b>80</b>/159</span>
                                             <div class="progress progress-sm">
                                                 <div class="progress-bar bg-success" style="width: 60%"></div>
                                             </div>
@@ -67,7 +68,7 @@ if(isset($_SESSION["usu_id"])){
                                     </div>
                                 </div>
                             </div>
-                            <table id="calificaciones_data" class="table display responsive nowrap">
+                            <table id="detalle_data" class="table display responsive nowrap">
                                 <thead>
                                     <tr>
                                         <th>Estudiante</th>
@@ -93,7 +94,8 @@ if(isset($_SESSION["usu_id"])){
         ?>
     </div>
     <!-- /.Site wrapper -->
-    <?php require_once("admCalificacionesModal.php"); ?>
+    <?php require_once("admmantenimiento.php"); ?>
+    <?php // require_once("admCalificacionesModal.php"); ?>
     <?php include("modulos/js.php"); ?>
     <script type="text/javascript" src="js/admCalificaciones.js"></script>
 </body>

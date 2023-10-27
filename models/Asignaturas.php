@@ -84,6 +84,17 @@
             return $resultado=$sql->fetchAll();
         }
 
+        public function asignaturas_mantenimiento($est_id){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="SELECT * FROM asignaturas WHERE asignaturas.est = 1
+                AND asig_id not in (select asig_id from asignaturaXestudiante where est_id=?)";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$est_id);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+
         public function asignaturas_id($asig_id){
             $conectar = parent::Conexion();
             parent::set_names();

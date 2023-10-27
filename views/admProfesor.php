@@ -49,10 +49,10 @@ if(isset($_SESSION["usu_id"])){
                                         <th>Profesor</th>
                                         <th>Correo</th>
                                         <th>Nivel Estudio</th>
-                                        <th>Sexo</th>
                                         <th>Teléfono</th>
                                         <th>Rol</th>
                                         <th>Escalafón</th>
+                                        <th>Estado</th>
                                         <th></th>
                                         <th></th>
                                     </tr>

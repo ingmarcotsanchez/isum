@@ -18,10 +18,11 @@
             return $resultado = $sql->fetchAll();
         }
 
-        public function calificaciones(){
+        public function calificaciones($est_id){
             $conectar= parent::conexion();
             parent::set_names();
             $sql="SELECT
+                asignaturaXestudiante.asigxest_id,
                 asignaturaXestudiante.est_id,
                 asignaturaXestudiante.asig_id,
                 estudiante.est_id,
@@ -31,39 +32,49 @@
                 asignaturas.asig_id,
                 asignaturas.asig_nom,
                 asignaturas.asig_alfa,
-                asignaturas.asig_nrc
+                asignaturas.asig_nrc,
+                asignaturaXestudiante.asigxest_nota,
+                asignaturaXestudiante.asigxest_est
                 FROM asignaturaXestudiante
                 INNER JOIN estudiante on asignaturaXestudiante.est_id = estudiante.est_id
                 INNER JOIN asignaturas on asignaturaXestudiante.asig_id = asignaturas.asig_id
-                WHERE asignaturaXestudiante.est = 1";
+                WHERE asignaturaXestudiante.est_id = ? AND asignaturaXestudiante.est = 1";
             $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$est_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
 
-        /*
-
-        public function obtener_creditos($estudianteId){
-            $conectar = parent::Conexion();
+        public function delete_estudiante_asignatura($asigxest_id){
+            $conectar= parent::conexion();
             parent::set_names();
-        
-                        // Realiza una consulta SQL para obtener los créditos del estudiante con el ID especificado
-            $sql = "SELECT SUM(c.cal_cred) AS creditos
-                    FROM calificacionxestudiante AS ce
-                    LEFT JOIN calificaciones AS c ON ce.cal_id = c.cal_id
-                    WHERE ce.est_id = :estudianteId";
-            $stmt = $conectar->prepare($sql);
-            $stmt->bindParam(":estudianteId", $estudianteId, PDO::PARAM_INT);
-            $stmt->execute();
+            $sql="UPDATE asignaturaXestudiante
+                SET
+                    est = 0
+                WHERE
+                    asigxest_id = ?";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $asigxest_id);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
 
-            // Verifica si se encontraron resultados
-            if ($stmt->rowCount() > 0) {
-                $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
-                return $resultado['creditos'];
-            } else {
-                return 0; // Si no se encontraron resultados, retorna 0 créditos.
-            }
-        }*/
+        public function update_estudiante_asignatura($asigxest_id, $asigxest_nota, $asigxest_est ){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="UPDATE asignaturaXestudiante
+                SET
+                    asigxest_nota = ?,
+                    asigxest_est = ?
+                WHERE
+                    asigxest_id = ?";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $asigxest_nota);
+            $sql->bindValue(2, $asigxest_est);
+            $sql->bindValue(3, $asigxest_id);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
         
     }
 ?>

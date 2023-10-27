@@ -68,6 +68,30 @@
         case "guardar_desde_excel":
             $asignatura->insert_asignatura($_POST["asig_nom"],$_POST["asig_alfa"],$_POST["asig_nrc"],$_POST["asig_cred"],$_POST["asig_horas"],$_POST["seme_id"]);
             break;
+
+        case "listar_asignaturas":
+            $datos=$asignatura->asignaturas_mantenimiento($_POST["est_id"]);
+            $data=Array();
+            foreach($datos as $row){
+                $sub_array = array();
+                //columnas de las tablas a mostrar segun select del modelo
+                $sub_array[] = "<input type='checkbox' name='detallecheck[]' value='". $row["asig_id"] ."'>";
+                $sub_array[] = $row["asig_nom"];
+                $sub_array[] = $row["asig_alfa"];
+                $sub_array[] = $row["asig_nrc"];
+                $sub_array[] = $row["asig_cred"];
+                $sub_array[] = $row["asig_horas"];
+            
+                $data[] = $sub_array;
+            }
+            /*Formato del datatable, se usa siempre*/
+            $results = array(
+                "sEcho"=>1,
+                "iTotalRecords"=>count($data),
+                "iTotalDisplayRecords"=>count($data),
+                "aaData"=>$data);
+            echo json_encode($results);
+            break;
         
             
      

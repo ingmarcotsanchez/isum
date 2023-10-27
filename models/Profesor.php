@@ -1,11 +1,11 @@
 <?php
     class Profesor extends Conectar{
-        public function insert_profesor($prof_nom,$prof_apep,$prof_apem,$prof_correo,$prof_niv,$prof_sex,$prof_telf,$rol_id,$esc_id){
+        public function insert_profesor($prof_nom,$prof_apep,$prof_apem,$prof_correo,$prof_niv,$prof_sex,$prof_telf,$rol_id,$esc_id,$prof_est){
 
             $conectar = parent::Conexion();
             parent::set_names();
-            $sql="INSERT INTO profesor (prof_id,prof_nom,prof_apep,prof_apem,prof_correo,prof_niv,prof_sex,prof_telf,rol_id,esc_id,fech_crea, est) 
-                                VALUES (NULL,?,?,?,?,?,?,?,?,?,now(),'1');";
+            $sql="INSERT INTO profesor (prof_id,prof_nom,prof_apep,prof_apem,prof_correo,prof_niv,prof_sex,prof_telf,rol_id,esc_id,prof_est,fech_crea, est) 
+                                VALUES (NULL,?,?,?,?,?,?,?,?,?,?,now(),'1');";
 
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $prof_nom);
@@ -17,12 +17,13 @@
             $sql->bindValue(7, $prof_telf);
             $sql->bindValue(8, $rol_id);
             $sql->bindValue(9, $esc_id);
+            $sql->bindValue(10, $prof_est);
             $sql->execute();
 
             return $resultado = $sql->fetchAll();
         }
 
-        public function update_profesor($prof_id,$prof_nom,$prof_apep,$prof_apem,$prof_correo,$prof_niv,$prof_sex,$prof_telf,$rol_id,$esc_id){
+        public function update_profesor($prof_id,$prof_nom,$prof_apep,$prof_apem,$prof_correo,$prof_niv,$prof_sex,$prof_telf,$rol_id,$esc_id,$prof_est){
 
             $conectar= parent::conexion();
             parent::set_names();
@@ -36,7 +37,8 @@
                     prof_sex = ?,
                     prof_telf = ?,
                     rol_id = ?,
-                    esc_id = ?
+                    esc_id = ?,
+                    prof_est = ?
                 WHERE
                     prof_id = ?";
             $sql=$conectar->prepare($sql);
@@ -49,7 +51,8 @@
             $sql->bindValue(7, $prof_telf);
             $sql->bindValue(8, $rol_id);
             $sql->bindValue(9, $esc_id);
-            $sql->bindValue(10, $prof_id);
+            $sql->bindValue(10, $prof_est);
+            $sql->bindValue(11, $prof_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
@@ -87,7 +90,8 @@
                 profesor.prof_telf,
                 profesor.rol_id,
                 escalafon.esc_id,
-                escalafon.esc_nombre
+                escalafon.esc_nombre,
+                profesor.prof_est
                 FROM profesor
                 INNER JOIN escalafon on profesor.esc_id = escalafon.esc_id
                 WHERE profesor.est = 1";
