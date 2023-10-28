@@ -55,15 +55,15 @@
                     
                     $sub_array[] = $row["est_seme"];
                     if($row["est_egre"] == 1){
-                        $sub_array[] = "Activo";
+                        $sub_array[] = "<p style='color:#28a745'>Activo</p>";
                     }else if($row["est_egre"] == 2){
-                        $sub_array[] = "Ausente";
+                        $sub_array[] = "<p style='color:#ffc107'>Ausente</p>";
                     }else if($row["est_egre"] == 3){
-                        $sub_array[] = "Egresado";
+                        $sub_array[] = "<p style='color:#007bff'>Egresado</p>";
                     }else if($row["est_egre"] == 4){
-                        $sub_array[] = "Egresado No Graduado";
+                        $sub_array[] = "<p style='color:#20c997'>Egresado No Graduado</p>";
                     }else{
-                        $sub_array[] = "Desertor";
+                        $sub_array[] = "<p style='color:#dc3545'>Desertor</p>";
                     }
                 
                     $sub_array[] = '<button type="button" onClick="editar('.$row["est_id"].');"  id="'.$row["est_id"].'" class="btn btn-outline-success btn-icon"><i class="bx bx-edit-alt"></i></button>';
@@ -91,6 +91,12 @@
             break;
         case "guardar_desde_excel":
             $estudiante->insert_estudiante($_POST["est_dni"],$_POST["est_tipo"],$_POST["est_cedula"],$_POST["est_nom"],$_POST["est_apep"],$_POST["est_apem"],$_POST["est_fecnac"],$_POST["est_correo"],$_POST["est_sex"],$_POST["est_telf"],$_POST["est_seme"],$_POST["est_egre"]);
+            break;
+        case "insert_estudiante_asignatura":
+            $datos = explode(',',$_POST['asig_id']);
+            foreach($datos as $row){
+                $estudiante->insert_estudiante_asignatura($_POST["est_id"],$row,"0.0",0,1);
+            }
             break;
         
             

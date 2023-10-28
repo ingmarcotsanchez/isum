@@ -37,17 +37,17 @@
                     $sub_array[] = $row["fac_cod"]." - ".$row["fac_nombre"];
                     $sub_array[] = $row["aut_ponderacion"];
                     $sub_array[] = $row["aut_califica"];
-
+                   
                     if($row["aut_cumple"] == 'P'){
-                        $sub_array[] = "Se cumple plenamente";
+                        $sub_array[] = "<p style='color:#28a745'>Se cumple plenamente</p>"; //aut_califica 90 - 100
                     }elseif ($row["aut_cumple"] == 'G'){
-                        $sub_array[] = "Se cumple en alto grado";
+                        $sub_array[] = "<p style='color:#20c997'>Se cumple en alto grado</p>";  //aut_califica 80 - 89
                     }elseif ($row["aut_cumple"] == 'A'){
-                        $sub_array[] = "Se cumple aceptablemente";
+                        $sub_array[] = "<p style='color:#ffc107'>Se cumple aceptablemente</p>"; //aut_califica 70 - 79
                     }elseif ($row["aut_cumple"] == 'I'){
-                        $sub_array[] = "Se cumple insatisfactoriamente";
+                        $sub_array[] = "<p style='color:#fd7e14'>Se cumple insatisfactoriamente</p>"; //aut_califica 60 - 69
                     }else{
-                        $sub_array[] = "No se cumple";
+                        $sub_array[] = "<p style='color:#dc3545'>No se cumple</p>"; //aut_califica <=59
                     }
                     
                     $sub_array[] = $row["aut_anno"];

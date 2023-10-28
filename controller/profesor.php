@@ -21,7 +21,6 @@
                         $output["prof_apem"] = $row["prof_apem"];
                         $output["prof_correo"] = $row["prof_correo"];
                         $output["prof_niv"] = $row["prof_niv"];
-                        //$output["prof_sex"] = $row["prof_sex"];
                         $output["prof_telf"] = $row["prof_telf"];
                         $output["rol_id"] = $row["rol_id"];
                         $output["esc_id"] = $row["esc_id"];
@@ -52,11 +51,6 @@
                     }else{
                         $sub_array[] = "Sin escalafón";
                     }
-                    /*if($row["prof_sex"] == 'M'){
-                        $sub_array[] = "Masculino";
-                    }else{
-                        $sub_array[] = "Femenino";
-                    }*/
                     $sub_array[] = $row["prof_telf"];
                     if($row["rol_id"] == 1){
                         $sub_array[] = "Coordinador";

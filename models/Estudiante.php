@@ -92,13 +92,25 @@
             return $resultado = $sql->fetchAll();
         }
 
-        
+        public function delete_estudiante_asignatura($asigxest_id){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="UPDATE asignaturaXestudiante
+                SET
+                    est = 0
+                WHERE
+                    asigxest_id = ?";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $asigxest_id);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
 
         /*TODO: Insert Curso por Usuario */
         public function insert_estudiante_asignatura($est_id,$asig_id){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="INSERT INTO asignaturaXestudiante (asigxest_id,est_id,asig_id,asigxest_nota, asigxest_est,est) VALUES (NULL,?,?,?,?,1);";
+            $sql="INSERT INTO asignaturaXestudiante (asigxest_id,est_id,asig_id,asigxest_nota, asigxest_est,est) VALUES (NULL,?,?,'0.0',0,1);";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $est_id);
             $sql->bindValue(2, $asig_id);

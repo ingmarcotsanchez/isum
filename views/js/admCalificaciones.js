@@ -1,7 +1,36 @@
 var usu_id = $('#usu_idx').val();
 
 function init(){
+    $("#calificaciones_form").on("submit",function(e){
+        guardaryeditar(e);
+    });
+}
 
+function guardaryeditar(e){
+    //console.log("prueba");
+    e.preventDefault();
+    var formData = new FormData($("#calificaciones_form")[0]);
+    //console.log(formData);
+    $.ajax({
+        url: "/ISUM/controller/calificaciones.php?opc=guardaryeditar",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        
+        success: function(data){
+            console.log(data);//#asignatura_data
+            $('#detalle_data').DataTable().ajax.reload();
+            $('#modalagregarCalificacion').modal('hide');
+
+            Swal.fire({
+                title: 'Correcto!',
+                text: 'Se Registro Correctamente',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            })
+        }
+    });
 }
 
 $(document).ready(function(){
@@ -169,7 +198,7 @@ function registrarasignatura(){
     if (asig_id == 0){
         Swal.fire({
             title: 'Error!',
-            text: 'Seleccionar Asignaturas',
+            text: 'Debe Seleccionar por lo menos una Asignatura',
             icon: 'error',
             confirmButtonText: 'Aceptar'
         })
@@ -180,39 +209,36 @@ function registrarasignatura(){
         formData.append('asig_id',asig_id);
 
         $.ajax({
-            url: "../../controller/estudiante.php?opc=insert_curso_usuario",
+            url: "/ISUM/controller/estudiante.php?opc=insert_estudiante_asignatura",
             type: "POST",
             data: formData,
             contentType: false,
             processData: false,
-            success : function(data) {
-                data = JSON.parse(data);
-
-                data.forEach(e => {
-                    e.forEach(i => {
-                        console.log(i['asigxest_id']);
-                        $.ajax({
-                            type: "POST",
-                            url: "../../controller/estudiante.php?opc=generar_qr",
-                            data: {asigxest_id : i['asigxest_id']},
-                            dataType: "json"
-                        });
-                    });
-                });
-            }
+            
         });
 
-        /* Recargar datatable de los usuarios del curso */
         $('#detalle_data').DataTable().ajax.reload();
 
-        $('#usuario_data').DataTable().ajax.reload();
-        /* ocultar modal */
+        $('#asignatura_data').DataTable().ajax.reload();
+       
         $('#modalmantenimiento').modal('hide');
 
     }
 }
 
-
+function editar(asigxest_id){
+    $.post("/ISUM/controller/calificaciones.php?opc=mostrar",{asigxest_id:asigxest_id},function (data){
+        data = JSON.parse(data);
+        //console.log(data);
+        $('#asigxest_id').val(data.asigxest_id);
+        $('#asig_id').val(data.asig_id).trigger('change');
+        $('#est_id').val(data.est_id);
+        $('#asigxest_nota').val(data.asigxest_nota);
+        $('#asigxest_est').val(data.asigxest_est);
+    });
+    $('#titulo_modal').html('Editar Calificación');
+    $('#modalagregarCalificacion').modal('show');
+}
 
 function combo_estudiante(){
     $.post("/ISUM/controller/estudiante.php?opc=combo", function (data) {

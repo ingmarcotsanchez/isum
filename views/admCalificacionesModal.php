@@ -15,7 +15,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="asig_id">Asignatura</label>
-                                <select class="form-control select2" style="width:100%" name="asig_id" id="asig_id" data-placeholder="Seleccione" readonly>
+                                <select class="form-control select2" style="width:100%" name="asig_id" id="asig_id" data-placeholder="Seleccione" disabled>
                                     <option label="Seleccione"></option>
                                 </select>
                             </div>
@@ -31,7 +31,11 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="asigxest_est">Estado</label>
-                                <input type="text" class="form-control" name="asigxest_est" id="asigxest_est" placeholder="Estado de la asignatura" readonly>
+                                <select class="form-control select2" name="asigxest_est" id="asigxest_est" data-placeholder="Seleccione">
+                                    <option label="Seleccione"></option>
+                                    <option value=1>Aprobada</option>
+                                    <option value=0>Reprobada</option>
+                                </select>
                             </div>
                         </div>
                     </div> 

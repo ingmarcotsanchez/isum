@@ -95,7 +95,7 @@ if(isset($_SESSION["usu_id"])){
     </div>
     <!-- /.Site wrapper -->
     <?php require_once("admmantenimiento.php"); ?>
-    <?php // require_once("admCalificacionesModal.php"); ?>
+    <?php require_once("admCalificacionesModal.php"); ?>
     <?php include("modulos/js.php"); ?>
     <script type="text/javascript" src="js/admCalificaciones.js"></script>
 </body>

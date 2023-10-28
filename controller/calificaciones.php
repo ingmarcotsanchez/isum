@@ -5,11 +5,42 @@
 
         switch($_GET["opc"]){
             case "guardaryeditar":
-                if(empty($_POST["est_id"])){
-                    $calificacion->insert_calificacion($_POST["asig_id"],$_POST["est_id"],$_POST["asigxest_nota"],$_POST["asigxest_est"]);
-                }/*else{
-                    $calificacion->update_calificacion($_POST["asig_id"],$_POST["est_id"],$_POST["asigxest_califica"],$_POST["est"]);
-                }*/
+                if(empty($_POST["asigxest_id"])){
+                    //$calificacion->insert_calificacion($_POST["asig_id"],$_POST["est_id"],$_POST["asigxest_nota"],$_POST["asigxest_est"]);
+                }else{
+                    $calificacion->update_estudiante_asignatura($_POST["asigxest_id"],$_POST["asigxest_nota"],$_POST["asigxest_est"]);
+                }
+                break;
+            //case "guardaryeditar":
+            case "editar_estudiante_asignatura":
+                /*TODO: Array de usuario separado por comas */
+                $datos = explode(',', $_POST['asigxest_id']);
+                /*TODO: Registrar tantos usuarios vengan de la vista */
+                $data = Array();
+                foreach($datos as $row){
+                    $sub_array = array();
+                    $idx=$calificacion->update_estudiante_asignatura($asigxest_id, $asigxest_nota, $asigxest_est);
+                    $sub_array[] = $idx;
+                    $data[] = $sub_array;
+                }
+    
+                echo json_encode($data);
+                break;
+
+
+            
+            case "mostrar":
+                $datos = $calificacion->calificaciones_id($_POST["asigxest_id"]);
+                if(is_array($datos)==true and count($datos)<>0){
+                    foreach($datos as $row){
+                        $output["asigxest_id"] = $row["asigxest_id"];
+                        $output["asig_id"] = $row["asig_id"];
+                        $output["est_id"] = $row["est_id"];
+                        $output["asigxest_nota"] = $row["asigxest_nota"];
+                        $output["asigxest_est"] = $row["asigxest_est"];
+                    }
+                    echo json_encode($output);
+                }
                 break;
             
             case "listar":
@@ -43,44 +74,21 @@
                 $calificacion->delete_estudiante_asignatura($_POST["asigxest_id"]);
                 break;
             /*TODO: Insetar detalle de curso usuario */
-            case "editar_estudiante_asignatura":
-                /*TODO: Array de usuario separado por comas */
-                $datos = explode(',', $_POST['asig_id']);
-                /*TODO: Registrar tantos usuarios vengan de la vista */
-                $data = Array();
-                foreach($datos as $row){
-                    $sub_array = array();
-                    $idx=$calificacion->update_estudiante_asignatura($asigxest_id, $asigxest_nota, $asigxest_est);
-                    $sub_array[] = $idx;
-                    $data[] = $sub_array;
-                }
-    
-                echo json_encode($data);
-                break;
-
-/*
-           
+            
             case "obtener_creditos":
-                if (isset($_POST["estudianteId"])) {
-                    $estudianteId = $_POST["estudianteId"];
-                    $creditos = $calificacion->obtener_creditos($estudianteId);
+                if (isset($_POST["est_id"])) {
+                    $estudiante = $_POST["est_id"];
+                    $creditos = $calificacion->total_creditos($asigxest_id);
                 
-                    $response = [
-                        "success" => true,
-                        "creditos" => $creditos
-                    ];
-                
+                    
                     echo json_encode($response);
                 } else {
-                    $response = [
-                        "success" => false,
-                        "message" => "ID de estudiante no proporcionado."
-                    ];
+                    
                 
                     echo json_encode($response);
                 }
                 break;
-                */
+                
         }
         
 ?> 
