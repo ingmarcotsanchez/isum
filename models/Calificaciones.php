@@ -45,12 +45,22 @@
         public function update_estudiante_asignatura($asigxest_id, $asigxest_nota, $asigxest_est ){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="UPDATE asignaturaXestudiante
-                SET
-                    asigxest_nota = ?,
-                    asigxest_est = ?
-                WHERE
-                    asigxest_id = ?";
+            /*if($asigxest_nota > 2.9){
+                $sql="UPDATE asignaturaXestudiante
+                    SET
+                        asigxest_nota = ?,
+                        asigxest_est = 1
+                    WHERE
+                        asigxest_id = ?";
+            }else{*/
+                $sql="UPDATE asignaturaXestudiante
+                    SET
+                        asigxest_nota = ?,
+                        asigxest_est = ?
+                    WHERE
+                        asigxest_id = ?";
+            //}
+            
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $asigxest_nota);
             $sql->bindValue(2, $asigxest_est);

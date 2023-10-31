@@ -45,7 +45,7 @@ if(isset($_SESSION["usu_id"])){
           
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-success">
+            <div class="small-box bg-dark">
               <div class="inner">
                 <h3 id="lbltotalProfesores"> </h3>
 
@@ -89,6 +89,90 @@ if(isset($_SESSION["usu_id"])){
                 <h3 id="lbltotalProductos"> </h3>
 
                 <p>Total de Productos</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+            </div>
+          </div>
+          
+          
+              
+          <!-- ./col -->
+        </div>
+        <div class="row">
+          <div class="col-lg-2 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3 id="lbltotalActivos"> </h3>
+
+                <p>Total Activos</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-6">
+            <!-- small box -->
+            <div class="small-box bg-primary">
+              <div class="inner">
+                <h3 id="lbltotalAusentes"> </h3>
+
+                <p>Total Ausentes</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3 id="lbltotalDesertores"> </h3>
+
+                <p>Total Desertores</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3 id="lbltotalNoGraduados"> </h3>
+
+                <p>Total No Graduados</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-6">
+            <!-- small box -->
+            <div class="small-box bg-light">
+              <div class="inner">
+                <h3 id="lbltotalEgresados"> </h3>
+
+                <p>Egresados</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-6">
+            <!-- small box -->
+            <div class="small-box bg-dark">
+              <div class="inner">
+                <h3 id="lbltotalEstudiantes"> </h3>
+
+                <p>Total de Estudiantes</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>

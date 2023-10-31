@@ -135,6 +135,66 @@
                 echo json_encode($output);
             }
             break;
+        case "total_estudiantes":
+            $datos=$usuario->total_estudiantes();
+            if(is_array($datos)==true and count($datos)>0){
+                foreach($datos as $row)
+                {
+                    $output["total"] = $row["total"];
+                }
+                echo json_encode($output);
+            }
+            break;
+        case "total_activos":
+            $datos=$usuario->total_activos();
+            if(is_array($datos)==true and count($datos)>0){
+                foreach($datos as $row)
+                {
+                    $output["total"] = $row["total"];
+                }
+                echo json_encode($output);
+            }
+            break;
+        case "total_ausentes":
+            $datos=$usuario->total_ausentes();
+            if(is_array($datos)==true and count($datos)>0){
+                foreach($datos as $row)
+                {
+                    $output["total"] = $row["total"];
+                }
+                echo json_encode($output);
+            }
+            break;
+        case "total_desertores":
+            $datos=$usuario->total_desertores();
+            if(is_array($datos)==true and count($datos)>0){
+                foreach($datos as $row)
+                {
+                    $output["total"] = $row["total"];
+                }
+                echo json_encode($output);
+            }
+            break;
+        case "total_egresados":
+            $datos=$usuario->total_egresados();
+            if(is_array($datos)==true and count($datos)>0){
+                foreach($datos as $row)
+                {
+                    $output["total"] = $row["total"];
+                }
+                echo json_encode($output);
+            }
+            break;
+        case "total_NoGraduados":
+            $datos=$usuario->total_NoGraduados();
+            if(is_array($datos)==true and count($datos)>0){
+                foreach($datos as $row)
+                {
+                    $output["total"] = $row["total"];
+                }
+                echo json_encode($output);
+            }
+            break;
 
             
         

@@ -192,5 +192,54 @@
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
+
+        public function total_NoGraduados(){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="SELECT count(*) as total FROM estudiante WHERE est_egre=4";
+            $sql=$conectar->prepare($sql);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+        public function total_egresados(){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="SELECT count(*) as total FROM estudiante WHERE est_egre=3";
+            $sql=$conectar->prepare($sql);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+        public function total_desertores(){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="SELECT count(*) as total FROM estudiante WHERE est_egre=5";
+            $sql=$conectar->prepare($sql);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+        public function total_ausentes(){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="SELECT count(*) as total FROM estudiante WHERE est_egre=2";
+            $sql=$conectar->prepare($sql);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+        public function total_activos(){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="SELECT count(*) as total FROM estudiante WHERE est_egre=1";
+            $sql=$conectar->prepare($sql);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+        public function total_estudiantes(){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="SELECT count(*) as total FROM estudiante";
+            $sql=$conectar->prepare($sql);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
     }
 ?>

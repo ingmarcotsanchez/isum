@@ -21,6 +21,31 @@ $(document).ready(function(){
         data = JSON.parse(data);
         $('#lbltotalProductos').html(data.total);
     });
+
+    $.post("/ISUM/controller/usuario.php?opc=total_estudiantes", { usu_id : usu_id }, function (data) {
+        data = JSON.parse(data);
+        $('#lbltotalEstudiantes').html(data.total);
+    });
+    $.post("/ISUM/controller/usuario.php?opc=total_egresados", { usu_id : usu_id }, function (data) {
+        data = JSON.parse(data);
+        $('#lbltotalEgresados').html(data.total);
+    });
+    $.post("/ISUM/controller/usuario.php?opc=total_NoGraduados", { usu_id : usu_id }, function (data) {
+        data = JSON.parse(data);
+        $('#lbltotalNoGraduados').html(data.total);
+    });
+    $.post("/ISUM/controller/usuario.php?opc=total_desertores", { usu_id : usu_id }, function (data) {
+        data = JSON.parse(data);
+        $('#lbltotalDesertores').html(data.total);
+    });
+    $.post("/ISUM/controller/usuario.php?opc=total_ausentes", { usu_id : usu_id }, function (data) {
+        data = JSON.parse(data);
+        $('#lbltotalAusentes').html(data.total);
+    });
+    $.post("/ISUM/controller/usuario.php?opc=total_activos", { usu_id : usu_id }, function (data) {
+        data = JSON.parse(data);
+        $('#lbltotalActivos').html(data.total);
+    });
 });
 
 
