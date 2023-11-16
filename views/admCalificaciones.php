@@ -59,10 +59,10 @@ if(isset($_SESSION["usu_id"])){
                                     <div class="form-group">
                                         <label class="form-control-label">Estado: <span class="tx-danger">*</span></label>
                                         <div class="progress-group">
-                                            <span class="progress-text">Porcentaje de la carrera</span>
-                                            <span class="float-right"><b>80</b>/159</span>
+                                            <span class="progress-text">Porcentaje aprobado en la carrera</span>
+                                            <span class="float-right"><b><span id="creditosAprobados">0</span></b>/159</span>
                                             <div class="progress progress-sm">
-                                                <div class="progress-bar bg-success" style="width: 60%"></div>
+                                                <div class="progress-bar bg-success" id="barraProgreso" style="width: 0%"></div>
                                             </div>
                                         </div>
                                     </div>

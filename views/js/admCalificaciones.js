@@ -183,6 +183,38 @@ function eliminar(asigxest_id){
     });
 }
 
+$('#est_id').change(function () {
+    var est_id = $(this).val();
+
+    if (est_id) {
+        $.ajax({
+            url: "/ISUM/controller/calificaciones.php?opc=obtener_creditos_aprobados",
+            type: "POST",
+            data: { est_id: est_id },
+            dataType: "json",
+            success: function (data) {
+                if (data.error) {
+                    console.error("Error al obtener créditos: " + data.error);
+                } else {
+                    // Procesar la respuesta JSON normalmente
+                    var totalCreditos = 159; // Puedes ajustar esto según tus necesidades
+                    var creditosAprobados = data.total_creditos || 0;
+                    var porcentaje = (creditosAprobados / totalCreditos) * 100;
+
+                    // Actualizar la barra de progreso y el número de créditos aprobados
+                    $("#barraProgreso").css("width", porcentaje + "%");
+                    $("#creditosAprobados").text(creditosAprobados);
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.error("Error al obtener créditos: " + errorThrown);
+            }
+        });
+    }
+});
+
+
+
 function registrarasignatura(){
     table = $('#asignatura_data').DataTable();
     var asig_id =[];
