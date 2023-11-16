@@ -79,6 +79,20 @@
             return $resultado = $sql->fetchAll();
         }
 
+        public function obtenerCreditosAprobados($est_id) {
+            $conectar = parent::conexion();
+            parent::set_names();
+            $sql = "SELECT SUM(asignaturas.asig_cred) as total_creditos
+                FROM asignaturaXestudiante
+                INNER JOIN asignaturas ON asignaturaXestudiante.asig_id = asignaturas.asig_id
+                WHERE asignaturaXestudiante.est_id = ? AND asignaturaXestudiante.asigxest_nota >= ?";
+            $sql = $conectar->prepare($sql);
+            $sql->bindValue(1, $est_id);
+            $sql->bindValue(2, 3.0);
+            $sql->execute();
+            return $sql->fetch(PDO::FETCH_ASSOC);
+        }
+
         public function total_creditos($asigxest_id){
             $conectar = parent::Conexion();
             parent::set_names();

@@ -88,6 +88,15 @@
                     echo json_encode($response);
                 }
                 break;
+            case "obtener_creditos_aprobados":
+                if (isset($_POST["est_id"])) {
+                    $est_id = $_POST["est_id"];
+                    $creditos = $calificacion->obtenerCreditosAprobados($est_id);
+                    echo json_encode($creditos);
+                } else {
+                    throw new Exception("No se proporcionó el ID del estudiante");
+                }
+                break;
                 
         }
         
