@@ -7,6 +7,33 @@ function init(){
 
 }
 
+function guardaryeditar(e){
+    //console.log("prueba");
+    e.preventDefault();
+    var formData = new FormData($("#estudiante_form")[0]);
+    //console.log(formData);
+    $.ajax({
+        url: "/ISUM/controller/estudiante.php?opc=guardaryeditar",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        
+        success: function(data){
+            console.log(data);
+            $('#estudiante_data').DataTable().ajax.reload();
+            $('#modalcrearEstudiante').modal('hide');
+
+            Swal.fire({
+                title: 'Correcto!',
+                text: 'Se Registro Correctamente',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            })
+        }
+    });
+}
+
 $(document).ready(function(){
 
     $('#estudiante_data').DataTable({

@@ -189,10 +189,7 @@ if(isset($_SESSION["usu_id"])){
 
       <div class="container-fluid">
         <div class="row">
-          <div class="col-6">
-            <div id="piechart"></div>
-          </div>
-          <div class="col-6">
+          <div class="col-12">
             <div id="columnchart_material"></div>
           </div>
         </div>
