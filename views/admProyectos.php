@@ -42,12 +42,12 @@ if(isset($_SESSION["usu_id"])){
                         </div>
                         <div class="card-body">
                             <button type="button" class="btn btn-outline-primary mb-2" onclick="nuevo()">Crear Proyecto</button>
-                            <table id="proyectos_data" class="table display responsive nowrap">
+                            <table id="proyectos_data" class="table display responsive wrap">
                                 <thead>
                                     <tr>
                                         <th>Proyectos</th>
                                         <th>Año</th>
-                                        <th>Líder</th>
+                                        <th>Investigador</th>
                                         <th>Presupuesto</th>
                                         <th>Programas</th>
                                         <th></th>

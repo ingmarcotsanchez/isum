@@ -43,16 +43,17 @@ if(isset($_SESSION["usu_id"])){
                         <div class="card-body">
                             <button type="button" class="btn btn-outline-primary mb-2" onclick="nuevo()">Crear Profesor</button>
                             <button type="button" class="btn btn-outline-secondary mb-2" id="btnplantilla">Cargar Planilla</button>
-                            <table id="profesor_data" class="table display responsive nowrap">
+                            <table id="profesor_data" class="table display responsive wrap">
                                 <thead>
                                     <tr>
                                         <th>Profesor</th>
-                                        <th>Correo</th>
+                                        
                                         <th>Nivel Estudio</th>
-                                        <th>Teléfono</th>
+                                        
                                         <th>Rol</th>
                                         <th>Escalafón</th>
                                         <th>Estado</th>
+                                        <th></th>
                                         <th></th>
                                         <th></th>
                                     </tr>

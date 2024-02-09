@@ -30,13 +30,19 @@
                                 <input type="text" class="form-control" name="prof_apem" id="prof_apem" placeholder="Ingrese Segundo Apellido">
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-6">
                             <div class="form-group">
-                                <label for="prof_correo">Correo Electrónico</label>
+                                <label for="prof_correo">Correo Electrónico Administrativo</label>
                                 <input type="email" class="form-control" name="prof_correo" id="prof_correo" placeholder="Ingrese un Correo">
                             </div>
                         </div>
                         <div class="col-6">
+                            <div class="form-group">
+                                <label for="prof_correo2">Correo Electrónico Académico</label>
+                                <input type="email" class="form-control" name="prof_correo2" id="prof_correo2" placeholder="Ingrese un Correo">
+                            </div>
+                        </div>
+                        <div class="col-4">
                             <div class="form-group">
                                 <label for="prof_niv">Último Nivel de Estudio</label>
                                 <select class="form-control select2" style="width:100%" name="prof_niv" id="prof_niv" data-placeholder="Seleccione">
@@ -48,7 +54,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="form-group">
                                 <label for="prof_sex">Sexo</label>
                                 <select class="form-control select2" style="width:100%" name="prof_sex" id="prof_sex" data-placeholder="Seleccione">
@@ -58,9 +64,9 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="form-group">
-                                <label for="prof_telf">Teléfono</label>
+                                <label for="prof_telf">Celular</label>
                                 <input type="text" class="form-control" name="prof_telf" id="prof_telf" placeholder="Ingrese Segundo Apellido">
                             </div>
                         </div>
@@ -82,6 +88,36 @@
                                     <option label="Seleccione"></option>
 
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="prof_fecini">Fecha de ingreso</label>
+                                <input type="date" class="form-control" name="prof_fecini" id="prof_fecini" placeholder="Seleccione una fecha">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="prof_fecfin">Fecha de retiro</label>
+                                <input type="date" class="form-control" name="prof_fecfin" id="prof_fecfin" placeholder="Seleccione una fecha">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="prof_cvlac">Link de CVLAC</label>
+                                <input type="text" class="form-control" name="prof_cvlac" id="prof_cvlac" placeholder="Ingrese un link">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="prof_orcid">Link de ORCID</label>
+                                <input type="text" class="form-control" name="prof_orcid" id="prof_orcid" placeholder="Ingrese un link">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="prof_google">Link de GOOGLE SHOLAR</label>
+                                <input type="text" class="form-control" name="prof_google" id="prof_google" placeholder="Ingrese un link">
                             </div>
                         </div>
                         <div class="col-6">

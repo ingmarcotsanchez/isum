@@ -2,13 +2,14 @@
     require_once("../config/conexion.php");
     require_once("../models/Profesor.php");
     $profesor = new Profesor();
+    //$prof = $profesor->get_profesorDetallexid($_GET['prof_id']);
 
     switch($_GET["opc"]){
         case "guardaryeditar":
                 if(empty($_POST["prof_id"])){
-                    $profesor->insert_profesor($_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],$_POST["prof_est"]);
+                    $profesor->insert_profesor($_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_correo2"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],date('Y-m-d',strtotime($_POST["prof_fecini"])),date('Y-m-d',strtotime($_POST["prof_fecfin"])),$_POST["prof_cvlac"],$_POST["prof_orcid"],$_POST["prof_google"],$_POST["prof_est"]);
                 }else{
-                    $profesor->update_profesor($_POST["prof_id"], $_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],$_POST["prof_est"]);
+                    $profesor->update_profesor($_POST["prof_id"], $_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_correo2"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],date('Y-m-d',strtotime($_POST["prof_fecini"])),date('Y-m-d',strtotime($_POST["prof_fecfin"])),$_POST["prof_cvlac"],$_POST["prof_orcid"],$_POST["prof_google"],$_POST["prof_est"]);
                 }
                 break;
         case "mostrar":
@@ -20,10 +21,16 @@
                         $output["prof_apep"] = $row["prof_apep"];
                         $output["prof_apem"] = $row["prof_apem"];
                         $output["prof_correo"] = $row["prof_correo"];
+                        $output["prof_correo2"] = $row["prof_correo2"];
                         $output["prof_niv"] = $row["prof_niv"];
                         $output["prof_telf"] = $row["prof_telf"];
                         $output["rol_id"] = $row["rol_id"];
                         $output["esc_id"] = $row["esc_id"];
+                        $output["prof_fecini"] = $row["prof_fecini"];
+                        $output["prof_fecfin"] = $row["prof_fecfin"];
+                        $output["prof_cvlac"] = $row["prof_cvlac"];
+                        $output["prof_orcid"] = $row["prof_orcid"];
+                        $output["prof_google"] = $row["prof_google"];
                         $output["prof_est"] = $row["prof_est"];
                     }
                     echo json_encode($output);
@@ -39,7 +46,7 @@
                     $sub_array = array();
                     //columnas de las tablas a mostrar segun select del modelo
                     $sub_array[] = $row["prof_nom"] ." ". $row["prof_apep"] ." ". $row["prof_apem"];
-                    $sub_array[] = $row["prof_correo"];
+                    //$sub_array[] = $row["prof_correo"];
                     if($row["prof_niv"] == 'P'){
                         $sub_array[] = "Pregrado";
                     }elseif ($row["prof_niv"] == 'E'){
@@ -51,7 +58,7 @@
                     }else{
                         $sub_array[] = "Sin escalafón";
                     }
-                    $sub_array[] = $row["prof_telf"];
+                    //$sub_array[] = $row["prof_telf"];
                     if($row["rol_id"] == 1){
                         $sub_array[] = "Coordinador";
                     }elseif ($row["rol_id"] == 2){
@@ -71,7 +78,7 @@
                     }
                     $sub_array[] = '<button type="button" onClick="editar('.$row["prof_id"].');"  id="'.$row["prof_id"].'" class="btn btn-outline-success btn-icon"><i class="bx bx-edit-alt"></i></button>';
                     $sub_array[] = '<button type="button" onClick="eliminar('.$row["prof_id"].');"  id="'.$row["prof_id"].'" class="btn btn-outline-danger btn-icon"><i class="bx bx-trash"></i></button>';
-                    
+                    $sub_array[] = '<button type="button" onClick="detalle_profesor('.$row["prof_id"].');"  id="'.$row["prof_id"].'" class="btn btn-outline-dark btn-icon"><i class="bx bx-book-content"></i></button>';
                     $data[] = $sub_array;
                 }
                 /*Formato del datatable, se usa siempre*/
@@ -93,7 +100,7 @@
             }
             break;
         case "guardar_desde_excel":
-            $profesor->insert_profesor($_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],$_POST["prof_est"]);
+            $profesor->insert_profesor($_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_correo2"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],$_POST["prof_fecini"],$_POST["prof_fecfin"],$_POST["prof_cvlac"],$_POST["prof_orcid"],$_POST["prof_google"],$_POST["prof_est"]);
             break;
         
         case "activo":

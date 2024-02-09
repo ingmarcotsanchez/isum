@@ -36,7 +36,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="prof_id">Líder</label>
+                                <label for="prof_id">Investigador</label>
                                 <select class="form-control select2" style="width:100%" name="prof_id" id="prof_id" data-placeholder="Seleccione">
                                     <option label="Seleccione"></option>
                                 </select>
