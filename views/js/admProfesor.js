@@ -116,6 +116,21 @@ function editar(prof_id){
     $('#modalcrearProfesor').modal('show');
 }
 
+function prof_act(prof_id){
+    $.post("/ISUM/controller/profesor.php?opc=activo",{prof_id:prof_id},function (data){
+        $('#profesor_data').DataTable().ajax.reload();
+       // data = JSON.parse(data);
+    });
+}
+
+function prof_ina(prof_id){
+    $.post("/ISUM/controller/profesor.php?opc=inactivo",{prof_id:prof_id},function (data){
+        $('#profesor_data').DataTable().ajax.reload();
+       // data = JSON.parse(data);
+    });
+}
+
+
 function eliminar(prof_id){
     Swal.fire({
         title: 'Eliminar!',

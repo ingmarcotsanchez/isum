@@ -64,10 +64,10 @@
                         $sub_array[] = "Sin rol";
                     }
                     $sub_array[] = $row["esc_nombre"];
-                    if($row["prof_est"] == 1){
-                        $sub_array[] = "<button class='btn btn-success btn-sm'>Activo</button>";
+                    if($row["prof_est"] == '1'){
+                        $sub_array[] = "<button type='button' onClick='prof_ina(".$row["prof_id"].");' class='btn btn-success btn-sm'>Activo</button>";
                     }else{
-                        $sub_array[] = "<button class='btn btn-danger btn-sm'>Inactivo</button>";
+                        $sub_array[] = "<button type='button' onClick='prof_act(".$row["prof_id"].");' class='btn btn-danger btn-sm'>Inactivo</button>";
                     }
                     $sub_array[] = '<button type="button" onClick="editar('.$row["prof_id"].');"  id="'.$row["prof_id"].'" class="btn btn-outline-success btn-icon"><i class="bx bx-edit-alt"></i></button>';
                     $sub_array[] = '<button type="button" onClick="eliminar('.$row["prof_id"].');"  id="'.$row["prof_id"].'" class="btn btn-outline-danger btn-icon"><i class="bx bx-trash"></i></button>';
@@ -96,7 +96,13 @@
             $profesor->insert_profesor($_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],$_POST["prof_est"]);
             break;
         
-            
+        case "activo":
+            $profesor->update_estadoActivo($_POST["prof_id"]);
+            break;
+        case "inactivo":
+            $profesor->update_estadoInactivo($_POST["prof_id"]);
+            break; 
+               
      
     }
 ?>

@@ -93,8 +93,7 @@
                 escalafon.esc_nombre,
                 profesor.prof_est
                 FROM profesor
-                INNER JOIN escalafon on profesor.esc_id = escalafon.esc_id
-                WHERE profesor.est = 1";
+                INNER JOIN escalafon on profesor.esc_id = escalafon.esc_id";
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado=$sql->fetchAll();
@@ -117,6 +116,25 @@
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado=$sql->fetchAll();
+        }
+
+        public function update_estadoActivo($prof_id){
+            $conectar = parent::Conexion();
+            parent::set_names();
+            $sql = "UPDATE profesor SET prof_est=1 WHERE prof_id = ?";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$prof_id);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
+        }
+        public function update_estadoInactivo($prof_id){
+            $conectar = parent::Conexion();
+            parent::set_names();
+            $sql = "UPDATE profesor SET prof_est=0 WHERE prof_id = ?";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$prof_id);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
         }
     }
 ?>
