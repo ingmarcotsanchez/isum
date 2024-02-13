@@ -98,6 +98,8 @@ function editar(pro_id){
         //console.log(data);
         $('#pro_id').val(data.pro_id);
         $('#pro_nom').val(data.pro_nom);
+        $('#grup_id').val(data.grup_id).trigger('change');
+        $('#linea_id').val(data.linea_id).trigger('change');
         $('#pro_anno').val(data.pro_anno);
         $('#prof_id').val(data.prof_id).trigger('change');
         $('#pro_pre').val(data.pro_pre);
@@ -136,6 +138,18 @@ function eliminar(pro_id){
 function select_profesor(){
     $.post("/ISUM/controller/profesor.php?opc=combo",function (data){
         $('#prof_id').html(data);
+    });
+}
+
+function select_grupo(){
+    $.post("/ISUM/controller/grupo.php?opc=combo",function (data){
+        $('#grup_id').html(data);
+    });
+}
+
+function select_linea(){
+    $.post("/ISUM/controller/linea.php?opc=combo",function (data){
+        $('#linea_id').html(data);
     });
 }
 init();

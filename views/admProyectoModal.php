@@ -42,12 +42,28 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="grup_id">Grupo de Investigación</label>
+                                <select class="form-control select2" style="width:100%" name="grup_id" id="grup_id" data-placeholder="Seleccione">
+                                    <option label="Seleccione"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="linea_id">Línea de Investigación</label>
+                                <select class="form-control select2" style="width:100%" name="linea_id" id="linea_id" data-placeholder="Seleccione">
+                                    <option label="Seleccione"></option>
+                                </select>
+                            </div>
+                        </div>
                     </div>  
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="pro_prog1">Programa # 1</label>
-                                <input type="text" class="form-control" name="pro_prog1" id="pro_prog1" placeholder="Ingrese el nombre del programa">
+                                <input type="text" class="form-control" name="pro_prog1" id="pro_prog1" placeholder="Ingrese el nombre del programa Investigador">
                             </div>
                         </div>
                     </div>
@@ -55,7 +71,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="pro_prog2">Programa # 2</label>
-                                <input type="text" class="form-control" name="pro_prog2" id="pro_prog2" placeholder="Ingrese el nombre del programa">
+                                <input type="text" class="form-control" name="pro_prog2" id="pro_prog2" placeholder="Ingrese el nombre del programa Co-Investigador">
                             </div>
                         </div>
                     </div>
@@ -63,7 +79,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="pro_prog3">Programa # 3</label>
-                                <input type="text" class="form-control" name="pro_prog3" id="pro_prog3" placeholder="Ingrese el nombre del programa">
+                                <input type="text" class="form-control" name="pro_prog3" id="pro_prog3" placeholder="Ingrese el nombre del programa Co-Investigador">
                             </div>
                         </div>
                     </div> 

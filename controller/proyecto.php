@@ -7,9 +7,9 @@
         
         case "guardaryeditar":
             if(empty($_POST["pro_id"])){
-                $proyecto->insert_proyecto($_POST["pro_nom"],$_POST["pro_anno"],$_POST["prof_id"],$_POST["pro_pre"],$_POST["pro_prog1"],$_POST["pro_prog2"],$_POST["pro_prog3"]);
+                $proyecto->insert_proyecto($_POST["pro_nom"],$_POST["grup_id"],$_POST["linea_id"],$_POST["pro_anno"],$_POST["prof_id"],$_POST["pro_pre"],$_POST["pro_prog1"],$_POST["pro_prog2"],$_POST["pro_prog3"]);
             }else{
-                $proyecto->update_proyecto($_POST["pro_id"],$_POST["pro_nom"],$_POST["pro_anno"],$_POST["prof_id"],$_POST["pro_pre"],$_POST["pro_prog1"],$_POST["pro_prog2"],$_POST["pro_prog3"]);
+                $proyecto->update_proyecto($_POST["pro_id"],$_POST["pro_nom"],$_POST["grup_id"],$_POST["linea_id"],$_POST["pro_anno"],$_POST["prof_id"],$_POST["pro_pre"],$_POST["pro_prog1"],$_POST["pro_prog2"],$_POST["pro_prog3"]);
             }
             break;
         case "mostrar":
@@ -18,6 +18,8 @@
                 foreach($datos as $row){
                     $output["pro_id"] = $row["pro_id"];
                     $output["pro_nom"] = $row["pro_nom"];
+                    $output["grup_id"] = $row["grup_id"];
+                    $output["linea_id"] = $row["linea_id"];
                     $output["pro_anno"] = $row["pro_anno"];
                     $output["prof_id"] = $row["prof_id"];
                     $output["pro_pre"] = $row["pro_pre"];
@@ -41,9 +43,6 @@
                 $sub_array[] = $row["pro_anno"];
                 $sub_array[] = $row["prof_nom"] ." ". $row["prof_apep"] ." ". $row["prof_apem"];
                 $sub_array[] = "$".$row["pro_pre"];
-                //$sub_array[] = $row["pro_prog1"];
-                //$sub_array[] = $row["pro_prog2"];
-                //$sub_array[] = $row["pro_prog3"];
                 $sub_array[] = $row["pro_prog1"] ." ". $row["pro_prog2"] ." ". $row["pro_prog3"];
                 $sub_array[] = '<button type="button" onClick="editar(' .$row["pro_id"]. ');"  id="' .$row["pro_id"] . '" class="btn btn-outline-success btn-icon"><i class="bx bx-edit-alt"></i></button>';
                 $sub_array[] = '<button type="button" onClick="eliminar(' .$row["pro_id"]. ');"  id="' .$row["pro_id"] . '" class="btn btn-outline-danger btn-icon"><i class="bx bx-trash"></i></button>';
@@ -61,10 +60,5 @@
         
             echo json_encode($results);
             break;
-            
-
-        
-            
-     
     }
 ?>
