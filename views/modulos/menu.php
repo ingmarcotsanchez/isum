@@ -78,25 +78,37 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                  <a href="<?php echo BASE_URL; ?>admSemilleros.php" class="nav-link">
-                    <i class="far fa-circle text-warning nav-icon"></i>
-                    <p>Semilleros</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="<?php echo BASE_URL; ?>admProyectos.php" class="nav-link">
-                    <i class="far fa-circle text-warning nav-icon"></i>
-                    <p>Proyectos</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="<?php echo BASE_URL; ?>admProductos.php" class="nav-link">
-                    <i class="far fa-circle text-warning nav-icon"></i>
-                    <p>Productos</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
+                <a href="<?php echo BASE_URL; ?>admGrupo.php" class="nav-link">
+                  <i class="far fa-circle text-warning nav-icon"></i>
+                  <p>Grupos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo BASE_URL; ?>admLinea.php" class="nav-link">
+                  <i class="far fa-circle text-warning nav-icon"></i>
+                  <p>Líneas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo BASE_URL; ?>admSemilleros.php" class="nav-link">
+                  <i class="far fa-circle text-warning nav-icon"></i>
+                  <p>Semilleros</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo BASE_URL; ?>admProyectos.php" class="nav-link">
+                  <i class="far fa-circle text-warning nav-icon"></i>
+                  <p>Proyectos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo BASE_URL; ?>admProductos.php" class="nav-link">
+                  <i class="far fa-circle text-warning nav-icon"></i>
+                  <p>Productos</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt text-primary"></i>
