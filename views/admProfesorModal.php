@@ -14,6 +14,16 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
+                                <label for="prof_image">Foto</label>
+                                <input type="file" class="prof_image" name="prof_image">
+                                <p class="help-block">Peso máximo de la imagen 2MB</p>
+                                <img src="views/image/profesor/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
                                 <label for="prof_nom">Nombre</label>
                                 <input type="text" class="form-control" name="prof_nom" id="prof_nom" placeholder="Ingrese un Nombre">
                             </div>

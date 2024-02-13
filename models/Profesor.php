@@ -67,9 +67,7 @@
             $sql->bindValue(9, $rol_id);
             $sql->bindValue(10, $esc_id);
             $sql->bindValue(11, $prof_fecini);
-            if($prof_fecfin == "1970-01-01"){
-                $prof_fecfin = "";  
-            }
+          
             $sql->bindValue(12, $prof_fecfin);
             $sql->bindValue(13, $prof_cvlac);
             $sql->bindValue(14, $prof_orcid);
