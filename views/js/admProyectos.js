@@ -39,7 +39,17 @@ $(document).ready(function(){
         dropdownParent: $("#modalcrearProyecto")
     });
 
+    $('#grup_id').select2({
+        dropdownParent: $("#modalcrearProyecto")
+    });
+
+    $('#linea_id').select2({
+        dropdownParent: $("#modalcrearProyecto")
+    });
+
     select_profesor();
+    select_grupo();
+    select_linea();
 
     $('#proyectos_data').DataTable({
         "aProcessing": true,

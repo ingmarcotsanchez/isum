@@ -5,7 +5,7 @@
             $conectar = parent::Conexion();
             parent::set_names();
             
-            $sql="INSERT INTO profesor (prof_id,prof_nom,prof_apep,prof_apem,prof_correo,prof_corre2,prof_niv,prof_sex,prof_telf,rol_id,esc_id,prof_est,fech_crea, est) 
+            $sql="INSERT INTO profesor (prof_id,prof_nom,prof_apep,prof_apem,prof_correo,prof_correo2,prof_niv,prof_sex,prof_telf,rol_id,esc_id,prof_est,fech_crea, est) 
                                 VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),'1');";
 
             $sql=$conectar->prepare($sql);

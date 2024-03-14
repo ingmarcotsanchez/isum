@@ -79,7 +79,9 @@
                 proyectos.pro_id,
                 proyectos.pro_nom,
                 grupos.grup_id,
+                grupos.grup_nom,
                 lineas.linea_id,
+                lineas.linea_nom,
                 proyectos.pro_anno,
                 profesor.prof_id,
                 profesor.prof_nom,
@@ -91,8 +93,8 @@
                 proyectos.pro_prog3
                 FROM proyectos
                 INNER JOIN profesor on proyectos.prof_id = profesor.prof_id
-                INNER JOIN grupos on proyectos.grup_id = profesor.grup_id
-                INNER JOIN lineas on proyectos.linea_id = profesor.linea_id
+                INNER JOIN grupos on proyectos.grup_id = grupos.grup_id
+                INNER JOIN lineas on proyectos.linea_id = lineas.linea_id
                 WHERE proyectos.est = 1";
             $sql=$conectar->prepare($sql);
             $sql->execute();

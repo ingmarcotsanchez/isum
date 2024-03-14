@@ -47,6 +47,8 @@ if(isset($_SESSION["usu_id"])){
                                     <tr>
                                         <th>Proyectos</th>
                                         <th>Año</th>
+                                        <th>Grupo</th>
+                                        <th>Línea</th>
                                         <th>Investigador</th>
                                         <th>Presupuesto</th>
                                         <th>Programas</th>
