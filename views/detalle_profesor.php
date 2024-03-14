@@ -44,7 +44,7 @@ if(isset($_SESSION["usu_id"])){
                             <div class="card-header ht-75"></div>
                             <div class="card-body">
                                 <div class="card-profile-img">
-                                    <img src="http://via.placeholder.com/280x280" alt="">
+                                    <img src='<?php echo $prof[$i]["prof_image"];?>' alt="foto de perfil">
                                 </div>
                                 <h4 class="tx-normal tx-roboto tx-white"><?php echo $prof[$i]["prof_nom"] ." ". $prof[$i]["prof_apep"] ." ". $prof[$i]["prof_apem"]; ?></h4>
                                 <?php
@@ -116,55 +116,23 @@ if(isset($_SESSION["usu_id"])){
                                             <p class="text-muted"><?php echo $prof[$i]["prof_orcid"];?></p>
                                             <strong>GOOGLE SCHOLAR</strong>
                                             <p class="text-muted"><?php echo $prof[$i]["prof_google"];?></p>
-                                            <a href="#" class="btn btn-primary btn-block"><b>Descargar</b></a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card">
                                         <div class="card-header p-2">
-                                            <ul class="nav nav-pills">
-                                                <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Evaluaciones</a></li>
-                                                <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Formación</a></li>
-                                            </ul>
+                                           <strong>Evaluaciones</strong>
                                         </div><!-- /.card-header -->
                                         <div class="card-body">
-                                            <div class="tab-content">
-                                                <div class="active tab-pane" id="activity">
-                                                    <div class="row">   
-                                                        <div class="col-12 col-sm-6 col-md-6">
-                                                            <div class="info-box">
-                                                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
-                                                                <div class="info-box-content">
-                                                                    <span class="info-box-text">2023-10</span>
-                                                                    <span class="info-box-number">
-                                                                    10
-                                                                    <small>%</small>
-                                                                    </span>
-                                                                </div>
-                                                            <!-- /.info-box-content -->
-                                                            </div>
+                                            <div class="row">   
+                                                <div class="col-12 col-sm-6 col-md-6">
+                                                    <div class="info-box">
+                                                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                                                        <div class="info-box-content">
+                                                            <span class="info-box-text">2021-60</span>
+                                                            <span class="info-box-number">3.5</span>
                                                         </div>
-                                                        <div class="col-12 col-sm-6 col-md-6">
-                                                            <div class="info-box">
-                                                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
-                                                                <div class="info-box-content">
-                                                                    <span class="info-box-text">2023-60</span>
-                                                                    <span class="info-box-number">
-                                                                    10
-                                                                    <small>%</small>
-                                                                    </span>
-                                                                </div>
-                                                            <!-- /.info-box-content -->
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="tab-pane" id="timeline">
-                                                    <div class="post">
-                                                          
                                                     </div>
                                                 </div>
                                             </div>

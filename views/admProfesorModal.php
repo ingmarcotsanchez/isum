@@ -140,6 +140,12 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="prof_cv">Hoja de vida</label>
+                                <input type="file" class="prof_cv" name="prof_cv" id="prof_cv">
+                            </div>
+                        </div>
                     </div>    
                 </div>
                 <div class="modal-footer justify-content-between">

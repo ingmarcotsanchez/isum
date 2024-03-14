@@ -8,16 +8,17 @@
         case "guardaryeditar":
             
                 if(empty($_POST["prof_id"])){
-                    $ruta = "views/images/profesor/default/anonymous.png";
+                    $ruta = "images/profesor/default/anonymous.png";
                     if(isset($_FILES["prof_image"]["tmp_name"])){
                         list($ancho, $alto) = getimagesize($_FILES["prof_image"]["tmp_name"]);
                         $nuevoAncho = 500;
                         $nuevoAlto = 500;
-                        $directorio = "views/images/profesor/".$_POST["prof_apep"];
-                        mkdir($directorio, 0755);
+                        $directorio = __DIR__."/../views/images/profesor/".$_POST["prof_apep"]."".$_POST["prof_apem"];
+                        var_dump($directorio);
+                        mkdir($directorio, 0777);
                         if($_FILES["prof_image"]["type"] == "image/jpeg"){
                             $aleatorio = mt_rand(100,999);
-                            $ruta = "views/images/profesor/".$_POST["prof_apep"]."/".$aleatorio.".jpg";
+                            $ruta = "images/profesor/".$_POST["prof_apep"]."/".$aleatorio.".jpg";
                             $origen = imagecreatefromjpeg($_FILES["prof_image"]["tmp_name"]);						
                             $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
                             imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
@@ -25,29 +26,29 @@
                         }
                         if($_FILES["prof_image"]["type"] == "image/png"){
                             $aleatorio = mt_rand(100,999);
-                            $ruta = "views/images/profesor/".$_POST["prof_apep"]."/".$aleatorio.".png";
+                            $ruta = "images/profesor/".$_POST["prof_apep"]."/".$aleatorio.".png";
                             $origen = imagecreatefrompng($_FILES["prof_image"]["tmp_name"]);
                             $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
                             imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
                             imagepng($destino, $ruta);
                         }
                     }
-                    
+                   
                     $profesor->insert_profesor($ruta,$_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_correo2"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],date('Y-m-d',strtotime($_POST["prof_fecini"])),date('Y-m-d',strtotime($_POST["prof_fecfin"])),$_POST["prof_cvlac"],$_POST["prof_orcid"],$_POST["prof_google"],$_POST["prof_est"]);
                     
                 }else{
                     //if(empty($_POST["prof_fecfin"])) {
                     //$_POST["prof_fecfin"] = null;
-                    $ruta = "views/images/profesor/default/anonymous.png";
+                    $ruta = "images/profesor/default/anonymous.png";
                     if(isset($_FILES["prof_image"]["tmp_name"])){
                         list($ancho, $alto) = getimagesize($_FILES["prof_image"]["tmp_name"]);
                         $nuevoAncho = 500;
                         $nuevoAlto = 500;
-                        $directorio = "views/images/profesor/".$_POST["prof_apep"];
-                        mkdir($directorio, 0755);
+                        $directorio = __DIR__."/../views/images/profesor/".$_POST["prof_apep"].$_POST["prof_apem"];
+                        mkdir($directorio, 0777);
                         if($_FILES["prof_image"]["type"] == "image/jpeg"){
                             $aleatorio = mt_rand(100,999);
-                            $ruta = "views/images/profesor/".$_POST["prof_apep"]."/".$aleatorio.".jpg";
+                            $ruta = __DIR__."/../views/images/profesor/".$_POST["prof_apep"].$_POST["prof_apem"]."/".$aleatorio.".jpg";
                             $origen = imagecreatefromjpeg($_FILES["prof_image"]["tmp_name"]);						
                             $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
                             imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
@@ -55,13 +56,15 @@
                         }
                         if($_FILES["prof_image"]["type"] == "image/png"){
                             $aleatorio = mt_rand(100,999);
-                            $ruta = "views/images/profesor/".$_POST["prof_apep"]."/".$aleatorio.".png";
+                            //$ruta = __DIR__."/../views/images/profesor/".$_POST["prof_apep"]."/".$aleatorio.".png";
+                            $ruta = __DIR__."/../views/images/profesor/".$_POST["prof_apep"].$_POST["prof_apem"]."/".$aleatorio.".jpg";
                             $origen = imagecreatefrompng($_FILES["prof_image"]["tmp_name"]);
                             $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
                             imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
                             imagepng($destino, $ruta);
                         }
                     }
+                   
                     $profesor->update_profesor($_POST["prof_id"], $ruta, $_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_correo2"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],date('Y-m-d',strtotime($_POST["prof_fecini"])),date('Y-m-d',strtotime($_POST["prof_fecfin"])),$_POST["prof_cvlac"],$_POST["prof_orcid"],$_POST["prof_google"],$_POST["prof_est"]);
                    // }
                 }
@@ -81,7 +84,10 @@
                         $output["rol_id"] = $row["rol_id"];
                         $output["esc_id"] = $row["esc_id"];
                         $output["prof_fecini"] = $row["prof_fecini"];
-                        $output["prof_fecfin"] = $row["prof_fecfin"];
+                        if($row["prof_fecfin"] == "1970-01-01"){
+                            $output["prof_fecfin"] = "Actualmente";
+                        }
+                        
                         $output["prof_cvlac"] = $row["prof_cvlac"];
                         $output["prof_orcid"] = $row["prof_orcid"];
                         $output["prof_google"] = $row["prof_google"];
@@ -154,7 +160,7 @@
             }
             break;
         case "guardar_desde_excel":
-            $profesor->insert_profesor($_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_correo2"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],$_POST["prof_fecini"],$_POST["prof_fecfin"],$_POST["prof_cvlac"],$_POST["prof_orcid"],$_POST["prof_google"],$_POST["prof_est"]);
+            $profesor->insert_profesor($_POST["prof_image"],$_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_correo2"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],$_POST["prof_fecini"],$_POST["prof_fecfin"],$_POST["prof_cvlac"],$_POST["prof_orcid"],$_POST["prof_google"],$_POST["prof_est"]);
             break;
         
         case "activo":
