@@ -41,6 +41,8 @@
                 // columnas de las tablas a mostrar segun select del modelo
                 $sub_array[] = $row["pro_nom"];
                 $sub_array[] = $row["pro_anno"];
+                $sub_array[] = $row["grup_nom"];
+                $sub_array[] = $row["linea_nom"];
                 $sub_array[] = $row["prof_nom"] ." ". $row["prof_apep"] ." ". $row["prof_apem"];
                 $sub_array[] = "$".$row["pro_pre"];
                 $sub_array[] = $row["pro_prog1"] ." ". $row["pro_prog2"] ." ". $row["pro_prog3"];
