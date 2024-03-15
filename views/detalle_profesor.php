@@ -126,12 +126,21 @@ if(isset($_SESSION["usu_id"])){
                                         </div><!-- /.card-header -->
                                         <div class="card-body">
                                             <div class="row">   
-                                                <div class="col-12 col-sm-6 col-md-6">
+                                                <div class="col-12 col-sm-6 col-md-4">
                                                     <div class="info-box">
                                                         <span class="info-box-icon bg-info elevation-1"><i class="fas fa-thumbs-up"></i></span>
                                                         <div class="info-box-content">
                                                             <span class="info-box-text">2021-60</span>
                                                             <span class="info-box-number">3.5</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6 col-md-4">
+                                                    <div class="info-box">
+                                                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                                                        <div class="info-box-content">
+                                                            <span class="info-box-text">2022-10</span>
+                                                            <span class="info-box-number">2.5</span>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -8,7 +8,7 @@
         case "guardaryeditar":
             
                 if(empty($_POST["prof_id"])){
-                    $ruta = "images/profesor/default/anonymous.png";
+                    $ruta = __DIR__."images/profesor/default/anonymous.png";
                     if(isset($_FILES["prof_image"]["tmp_name"])){
                         list($ancho, $alto) = getimagesize($_FILES["prof_image"]["tmp_name"]);
                         $nuevoAncho = 500;
@@ -18,7 +18,8 @@
                         mkdir($directorio, 0777);
                         if($_FILES["prof_image"]["type"] == "image/jpeg"){
                             $aleatorio = mt_rand(100,999);
-                            $ruta = "images/profesor/".$_POST["prof_apep"]."/".$aleatorio.".jpg";
+                            $ruta = __DIR__."/../views/images/profesor/".$_POST["prof_apep"].$_POST["prof_apem"]."/".$aleatorio.".jpg";
+                            //$ruta = "images/profesor/".$_POST["prof_apep"]."/".$aleatorio.".jpg";
                             $origen = imagecreatefromjpeg($_FILES["prof_image"]["tmp_name"]);						
                             $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
                             imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
@@ -26,7 +27,8 @@
                         }
                         if($_FILES["prof_image"]["type"] == "image/png"){
                             $aleatorio = mt_rand(100,999);
-                            $ruta = "images/profesor/".$_POST["prof_apep"]."/".$aleatorio.".png";
+                            $ruta = __DIR__."/../views/images/profesor/".$_POST["prof_apep"].$_POST["prof_apem"]."/".$aleatorio.".jpg";
+                            //$ruta = "images/profesor/".$_POST["prof_apep"]."/".$aleatorio.".png";
                             $origen = imagecreatefrompng($_FILES["prof_image"]["tmp_name"]);
                             $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
                             imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
@@ -39,7 +41,7 @@
                 }else{
                     //if(empty($_POST["prof_fecfin"])) {
                     //$_POST["prof_fecfin"] = null;
-                    $ruta = "images/profesor/default/anonymous.png";
+                    $ruta = __DIR__."images/profesor/default/anonymous.png";
                     if(isset($_FILES["prof_image"]["tmp_name"])){
                         list($ancho, $alto) = getimagesize($_FILES["prof_image"]["tmp_name"]);
                         $nuevoAncho = 500;
