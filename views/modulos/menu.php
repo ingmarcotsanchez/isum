@@ -66,6 +66,12 @@
                   <p>Roles</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="<?php echo BASE_URL; ?>admEvaluacion.php" class="nav-link">
+                  <i class="far fa-circle text-success nav-icon"></i>
+                  <p>Evaluación Estudiantes</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
